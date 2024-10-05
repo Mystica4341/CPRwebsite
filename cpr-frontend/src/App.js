@@ -11,7 +11,6 @@ function App() {
       <Routes>
         <Route path="/" element={<ClientRoute children={<Home />} />} />
         <Route path="/menu" element={<ClientRoute children={<Menu />} />} />
-        <Route path="/menu" element={<ClientRoute children={<Menu />} />} />
       </Routes> 
     </BrowserRouter>
   );

@@ -7,8 +7,6 @@ export default function Home() {
     <div>
       <div>
         <Banner />
-      </div>
-      <div>
         <Nav />
       </div>
     </div>
