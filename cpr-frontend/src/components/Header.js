@@ -7,7 +7,7 @@ export default function Header() {
     <div className='flex justify-between space-x-3, pl-12 rounded-sm'>
 
       {/* Logo */}
-     <img className='h-20 w-auto' src='https://i.imgur.com/jjcnpGG.jpeg' ></img>
+     <img className='h-20 w-auto' src='https://i.imgur.com/HxUij9o.jpg' ></img>
 
 
       {/* Title */}
