@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
 const Banner = () => {
   return (
     <div className="mt-7 relative w-full h-96 bg-gray-800 overflow-hidden">
       <img
-        src="https://www.lotteria.vn/media/banner/b/a/banner_si_u_sao_g_p_th__banner_web.jpg" 
+        src="https://www.lotteria.vn/media/banner/b/a/banner_si_u_sao_g_p_th__banner_web.jpg"
         alt="Banner"
         className="absolute inset-0 object-cover w-full h-full opacity-70"
       />
