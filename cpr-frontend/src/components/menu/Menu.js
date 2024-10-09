@@ -1,6 +1,6 @@
 import React from "react";
 import ComboList from '../ComboList'
-import { combo } from '../data/combo'
+import { combo } from "../../data/combo";
 
 export default function Menu() {
   return (
