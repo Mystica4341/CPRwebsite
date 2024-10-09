@@ -2,7 +2,7 @@ import React from 'react'
 import Banner from '../Banner'
 import Nav from '../Navigator'
 import ComboList from '../ComboList'
-import { combo } from '../data/combo'
+import { combo } from '../../data/combo'
 
 export default function Home() {
   return (
