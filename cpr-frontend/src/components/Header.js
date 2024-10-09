@@ -18,6 +18,7 @@ export default function Header() {
         className="h-20 w-auto"
         src="https://i.imgur.com/HxUij9o.jpg"
         alt="Logo"
+        onClick={() => navigate("/")}
       />
 
       {/* Title */}

@@ -9,9 +9,7 @@ export default function Nav() {
       <div className="container mx-auto flex justify-around">
         <div className="flex items-center w-24 h-24">
           <img
-            src="https://imgur.com/AGqTqcW.jpeg"
-            alt="Bestseller icon"
-            className="mr-2"
+            src="https://imgur.com/AGqTqcW.jpeg"  alt="Bestseller icon" className="mr-2"
           />
           <a href="#" className="font-bold hover:text-red-500">
             BESTSELLER
@@ -19,9 +17,7 @@ export default function Nav() {
         </div>
         <div className="flex items-center">
           <img
-            src="https://imgur.com/gNpii9J.jpeg "
-            alt="Order icon"
-            className="mr-2"
+            src="https://imgur.com/gNpii9J.jpeg " alt="Order icon" className="mr-2"
           />
           <a href="#" className="font-bold hover:text-red-500">
             ĐẶT HÀNG
@@ -29,9 +25,7 @@ export default function Nav() {
         </div>
         <div className="flex items-center">
           <img
-            src="https://imgur.com/pZqVwte.jpeg"
-            alt="Promotion icon"
-            className="mr-2"
+            src="https://imgur.com/pZqVwte.jpeg" alt="Promotion icon" className="mr-2"
           />
           <a href="#" className="font-bold hover:text-red-500">
             KHUYẾN MÃI
@@ -39,9 +33,7 @@ export default function Nav() {
         </div>
         <div className="flex items-center">
           <img
-            src="https://imgur.com/8ZY1eAS.jpeg"
-            alt="Store icon"
-            className="mr-2"
+            src="https://imgur.com/8ZY1eAS.jpeg" alt="Store icon" className="mr-2"
           />
           <a href="#" className="font-bold hover:text-red-500">
             CỬA HÀNG
