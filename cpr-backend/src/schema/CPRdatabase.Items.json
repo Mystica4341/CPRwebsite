@@ -1,0 +1,181 @@
+[{
+  "_id": {
+    "$oid": "670a531ea6ec19759e808e75"
+  },
+  "item_name": "Gà Rán Original",
+  "category": "Gà rán",
+  "item_url": "",
+  "description": "Gà rán truyền thống với lớp vỏ giòn tan.",
+  "price": 35000,
+  "status": "Active"
+},
+{
+  "_id": {
+    "$oid": "670a531ea6ec19759e808e76"
+  },
+  "item_name": "Gà Rán Spicy",
+  "category": "Gà rán",
+  "item_url": "",
+  "description": "Gà rán cay đậm đà hương vị.",
+  "price": 38000,
+  "status": "Active"
+},
+{
+  "_id": {
+    "$oid": "670a531ea6ec19759e808e77"
+  },
+  "item_name": "Combo Gà Rán 2 Miếng",
+  "category": [
+    "Gà rán",
+    "Món ăn kèm",
+    "Nước"
+  ],
+  "item_url": "",
+  "description": "2 miếng gà rán kèm khoai tây chiên và nước ngọt.",
+  "price": 79000,
+  "status": "Active"
+},
+{
+  "_id": {
+    "$oid": "670a531ea6ec19759e808e78"
+  },
+  "item_name": "Burger Gà",
+  "category": "Burger",
+  "item_url": "",
+  "description": "Bánh burger kẹp gà giòn cùng rau và sốt đặc biệt.",
+  "price": 45000,
+  "status": "Active"
+},
+{
+  "_id": {
+    "$oid": "670a531ea6ec19759e808e79"
+  },
+  "item_name": "Burger Bò",
+  "category": "Burger",
+  "item_url": "",
+  "description": "Bánh burger bò thơm ngon với phô mai tan chảy.",
+  "price": 48000,
+  "status": "Active"
+},
+{
+  "_id": {
+    "$oid": "670a531ea6ec19759e808e7a"
+  },
+  "item_name": "Coca-Cola",
+  "category": "Nước",
+  "item_url": "",
+  "description": "Ly Coca-Cola mát lạnh.",
+  "price": 15000,
+  "status": "Active"
+},
+{
+  "_id": {
+    "$oid": "670a531ea6ec19759e808e7b"
+  },
+  "item_name": "Trà Đào",
+  "category": "Nước",
+  "item_url": "",
+  "description": "Trà đào ngọt thanh, tươi mát.",
+  "price": 20000,
+  "status": "Active"
+},
+{
+  "_id": {
+    "$oid": "670a531ea6ec19759e808e7c"
+  },
+  "item_name": "Khoai Tây Chiên",
+  "category": "Món ăn kèm",
+  "item_url": "",
+  "description": "Khoai tây chiên giòn rụm.",
+  "price": 25000,
+  "status": "Active"
+},
+{
+  "_id": {
+    "$oid": "670a531ea6ec19759e808e7d"
+  },
+  "item_name": "Salad Trộn",
+  "category": "Món ăn kèm",
+  "item_url": "",
+  "description": "Salad tươi với sốt mè rang.",
+  "price": 30000,
+  "status": "Active"
+},
+{
+  "_id": {
+    "$oid": "670a531ea6ec19759e808e7e"
+  },
+  "item_name": "Kem Vani",
+  "category": "Món tráng miệng",
+  "item_url": "",
+  "description": "Kem vani mát lạnh, thơm ngon.",
+  "price": 10000,
+  "status": "Active"
+},
+{
+  "_id": {
+    "$oid": "670a531ea6ec19759e808e7f"
+  },
+  "item_name": "Kem Sô-cô-la",
+  "category": "Món tráng miệng",
+  "item_url": "",
+  "description": "Kem sô-cô-la đậm đà vị cacao.",
+  "price": 12000,
+  "status": "Inactive"
+},
+{
+  "_id": {
+    "$oid": "670a531ea6ec19759e808e80"
+  },
+  "item_name": "Combo Gà Rán 3 Miếng",
+  "category": [
+    "Gà rán",
+    "Món ăn kèm",
+    "Nước"
+  ],
+  "item_url": "",
+  "description": "3 miếng gà rán, khoai tây chiên và nước ngọt.",
+  "price": 99000,
+  "status": "Active"
+},
+{
+  "_id": {
+    "$oid": "670a531ea6ec19759e808e81"
+  },
+  "item_name": "Combo Burger Gà",
+  "category": [
+    "Burger",
+    "Món ăn kèm",
+    "Nước"
+  ],
+  "item_url": "",
+  "description": "Burger gà, khoai tây chiên và Coca-Cola.",
+  "price": 75000,
+  "status": "Active"
+},
+{
+  "_id": {
+    "$oid": "670a531ea6ec19759e808e82"
+  },
+  "item_name": "Combo Gia Đình",
+  "category": [
+    "Gà rán",
+    "Món ăn kèm",
+    "Nước"
+  ],
+  "item_url": "",
+  "description": "5 miếng gà rán, 2 phần khoai tây chiên và 2 nước ngọt.",
+  "price": 149000,
+  "status": "Inactive"
+},
+{
+  "_id": {
+    "$oid": "670a531ea6ec19759e808e83"
+  },
+  "item_name": "Phô Mai Que",
+  "category": "Món ăn kèm",
+  "item_url": "",
+  "description": "Que phô mai giòn, béo ngậy.",
+  "price": 35000,
+  "status": "Active"
+}]

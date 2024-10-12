@@ -1,0 +1,57 @@
+[{
+  "_id": {
+    "$oid": "670a55aba6ec19759e81b82e"
+  },
+  "username": "Tiến Tài",
+  "order_date": "01-01-2022",
+  "items": [
+    {
+      "item_name": "Combo Gà Rán 3 Miêng",
+      "quantity": 3
+    },
+    {
+      "item_name": "Khoai Tây Chiên",
+      "quantity": 1
+    }
+  ],
+  "total": 395000,
+  "status": "Success"
+},
+{
+  "_id": {
+    "$oid": "670a55aba6ec19759e81b82f"
+  },
+  "username": "Minh Thông",
+  "order_date": "01-11-2022",
+  "items": [
+    {
+      "item_name": "Combo Burger gà",
+      "quantity": 3
+    },
+    {
+      "item_name": "Coca Cola",
+      "quantity": 1
+    }
+  ],
+  "total": 435000,
+  "status": "Cancel"
+},
+{
+  "_id": {
+    "$oid": "670a55aba6ec19759e81b830"
+  },
+  "username": "Xuân Tỷ",
+  "order_date": "12-11-2022",
+  "items": [
+    {
+      "item_name": "Gà rán Original",
+      "quantity": 2
+    },
+    {
+      "item_name": "Coca Cola",
+      "quantity": 1
+    }
+  ],
+  "total": 145000,
+  "status": "Success"
+}]

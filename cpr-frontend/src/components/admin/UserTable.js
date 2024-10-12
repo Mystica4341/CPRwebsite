@@ -2,17 +2,27 @@ import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { FaTrashAlt } from "react-icons/fa";
 import { GoPencil } from "react-icons/go";
+import { getAllUsers } from "../../services/UserService";
 
 export default function UserTable() {
     const [listUsers, setListUsers] = useState([
         { Id: 1, Name: "John Doe", Email: "john@example.com", Status: 1 },
         { Id: 2, Name: "Jane Smith", Email: "jane@example.com", Status: 0 }
-    ]); // Mock Data for Users
-    const [totalPages, setTotalPages] = useState(2); // Example of total pages
+    ]); 
+    const [totalPages, setTotalPages] = useState(2); 
     const [currentPage, setCurrentPage] = useState(1);
 
+    // Fetch all users when the component is mounted
     useEffect(() => {
-        // No backend call, just update the list from mock data
+        try{
+            getAllUsers().then((res) => {
+                if (res.statusCode === 200 && res.data) {
+                    setListUsers(res.data);
+                }
+            });
+        } catch (error) {
+            console.log("Error with fetching: ", error);
+        }
     }, [currentPage]);
 
     const handlePageClick = (event) => {
@@ -21,11 +31,11 @@ export default function UserTable() {
     };
 
     const handleEditUser = (user) => {
-        console.log("Edit user: ", user); // Mock Edit
+        console.log("Edit user: ", user); 
     };
 
     const handleDeleteUser = (user) => {
-        console.log("Delete user: ", user); // Mock Delete
+        console.log("Delete user: ", user); 
     };
 
     return (
