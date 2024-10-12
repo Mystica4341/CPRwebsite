@@ -3,10 +3,13 @@ import Home from "./components/home/Home";
 import Menu from "./components/menu/Menu";
 import Cart from "./components/cart/Carts";
 import AboutUs from "./components/AboutUs";
+// import Sidebar from "./components/admin/Sidebar";
+import UserTable from "./components/admin/UserTable";
 import Login from "./components/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from './context/CartContext'; 
 import ClientRoute from "./components/routes/ClientRoute";
+import AdminRoute from "./components/routes/AdminRoute";
 
 function App() {
   return (
@@ -20,6 +23,7 @@ function App() {
           path="/AboutUs"
           element={<ClientRoute children={<AboutUs />} />}
         />
+         <Route path="/UserTable" element={<AdminRoute children={<UserTable />} />} />
         <Route path="/Login" element={<ClientRoute children={<Login />} />} />
       </Routes>
       </CartProvider>

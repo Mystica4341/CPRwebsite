@@ -23,6 +23,7 @@ export default function Header() {
         <a className="hover:text-red-500 transition-colors duration-300">Đồ Uống</a>
         <a className="hover:text-red-500 transition-colors duration-300">Combo</a>
         <Link to="/AboutUs" className="hover:text-red-500 transition-colors duration-300">About Us</Link>
+        <Link to="/UserTable" className="hover:text-red-500 transition-colors duration-300">Admin</Link>
       </div>
 
       <div className="space-x-5 my-auto border-black border-2 rounded-sm flex">
