@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Nav() {
+export default function NavigationBar() {
   return (
     <section
       className="bg-pink-100 py-4 mx-4 my-4 rounded-lg"

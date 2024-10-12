@@ -1,7 +1,7 @@
 import React from 'react'
 import Banner from '../Banner'
-import Nav from '../Navigator'
-import ComboList from '../ComboList'
+import NavigationBar from '../Navigator'
+import ItemsList from '../Item'
 import { combo } from '../../data/combo'
 
 export default function Home() {
@@ -9,10 +9,10 @@ export default function Home() {
     <div>
       <div>
         <Banner />
-        <Nav />
+        <NavigationBar />
         <div className='grid grid-cols-4 gap-4 p-4'>
           {combo.map(item => (
-            <ComboList {...item} />
+            <ItemsList {...item} />
           ))}
         </div>
       </div>

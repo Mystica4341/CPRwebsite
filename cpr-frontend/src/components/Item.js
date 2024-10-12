@@ -1,7 +1,7 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
 
-export default function ComboList(props) {
+export default function ItemsList(props) {
   const { addToCart } = useCart(); // Sử dụng hook từ context
 
   const handleAddToCart = () => {
