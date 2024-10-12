@@ -11,9 +11,11 @@ connectDB();
 const app = express();
 swagger(app);
 
-app.get("/", (req, res) => {
-	res.send("Hello World!");
-});
+//Import Route
+app.use("/", require("./routes/hello"));
+app.use("/", require("./routes/userRoute"));
+app.use("/", require("./routes/itemRoute"));
+
 
 app.listen(port, () => {
 	console.log(`app listening at http://localhost:${port}`);
