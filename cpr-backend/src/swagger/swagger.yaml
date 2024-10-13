@@ -1,0 +1,474 @@
+openapi: 3.0.3
+info:
+  title: Swagger Petstore - OpenAPI 3.0
+  description: |-
+    Đây là API của website CPR
+  version: 1.0.1
+servers:
+tags:
+  - name: Account
+    description: API handle login and logout
+  - name: User
+    description: API related for user
+  - name: Item
+    description: API related for item
+  - name: Order
+    description: API related for order
+  - name: Category
+    description: API related for category
+paths:
+  /api/item:
+    post:
+      tags:
+        - Item
+      summary: Add a new Item
+      description: create a new Item
+      operationId: createItem
+      requestBody:
+        description: Create a new pet in the store
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Item"
+        required: true
+      responses:
+        "200":
+          description: Create item success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+        "400":
+          description: Invalid input
+        "422":
+          description: Validation exception
+    get:
+      tags:
+        - Item
+      summary: Get all Items
+      description: Returns a list of items
+      operationId: getAllItems
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Item not found
+  /api/item/{itemId}:
+    put:
+      tags:
+        - Item
+      summary: Update an existing Item
+      description: Update an existing Item by id
+      operationId: updateItemById
+      parameters:
+        - name: itemId
+          in: path
+          description: Id of an Item
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Update an existent Item
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Item"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Item not found
+        "422":
+          description: Validation exception
+    get:
+      tags:
+        - Item
+      summary: Find Item by Id
+      description: Returns a single Item
+      operationId: getItemById
+      parameters:
+        - name: itemId
+          in: path
+          description: Id of an Item
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Item not found
+    delete:
+      tags:
+        - Item
+      summary: Deletes an Item
+      description: delete an Item by Id
+      operationId: deletePet
+      parameters:
+        - name: itemId
+          in: path
+          description: Id of an Item
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplies
+  /api/item/{term}:
+    get:
+      tags:
+        - Item
+      summary: Find Item by Name or Category
+      description: Returns a list of item
+      operationId: getItemByTerm
+      parameters:
+        - name: term
+          in: path
+          description: The name or category of items
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Item not found
+  /api/user:
+    post:
+      tags:
+        - User
+      summary: Create user
+      description: This can only be done by the logged in user.
+      operationId: createUser
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "201":
+          description: Create user success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    get:
+      tags:
+        - User
+      summary: Get all users
+      description: Return a list of users
+      operationId: getAllUsers
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid username supplied
+        "404":
+          description: User not found
+  /api/user/login:
+    get:
+      tags:
+        - Account
+      summary: Logs user into the system
+      description: ""
+      operationId: loginUser
+      parameters:
+        - name: username
+          in: query
+          description: The user name for login
+          required: false
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: The password for login in clear text
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              description: calls per hour allowed by the user
+              schema:
+                type: integer
+                format: int32
+            X-Expires-After:
+              description: date in UTC when token expires
+              schema:
+                type: string
+                format: date-time
+          content:
+            application/xml:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+        "400":
+          description: Invalid username/password supplied
+  /api/user/logout:
+    get:
+      tags:
+        - Account
+      summary: Logs out current logged in user session
+      description: ""
+      operationId: logoutUser
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+  /api/user/{username}:
+    get:
+      tags:
+        - User
+      summary: Get user by username
+      description: ""
+      operationId: getUserByName
+      parameters:
+        - name: username
+          in: path
+          description: "The username of the user"
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid username supplied
+        "404":
+          description: User not found
+  /api/user/{userId}:
+    put:
+      tags:
+        - User
+      summary: Update user
+      description: This can only be done by the logged in user.
+      operationId: updateUser
+      parameters:
+        - name: userId
+          in: path
+          description: Id of user
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Update an existent user in the store
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: successful operation
+    delete:
+      tags:
+        - User
+      summary: Delete user
+      description: This can only be done by the logged in user.
+      operationId: deleteUser
+      parameters:
+        - name: userId
+          in: path
+          description: Id of user
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid username supplied
+        "404":
+          description: User not found
+  /api/hello:
+    get:
+      summary: test API
+      responses:
+        "200":
+          description: successful operation
+components:
+  schemas:
+    Order:
+      type: object
+      properties:
+        username:
+          type: string
+          example: Steve
+        oderDate:
+          type: string
+          example: "01-01-2024"
+        Items:
+          type: object
+          properties:
+            itemName:
+              type: string
+            quantiy:
+              type: integer
+        status:
+          type: string
+          description: Order Status
+          example: Success
+          enum:
+            - Success
+            - Cancel
+    User:
+      required:
+        - username
+        - email
+        - phoneNumber
+        - address
+      type: object
+      properties:
+        username:
+          type: string
+          example: "Tiến Tài"
+        email:
+          type: string
+          example: tientai@email.com
+        password:
+          type: string
+          example: "Pa$$w0rd"
+        phoneNumber:
+          type: string
+          example: "12345"
+        address:
+          type: string
+          example: "Thành phố HCM"
+        role:
+          type: string
+          example: "user"
+          enum:
+            - admin
+            - user
+        status:
+          type: string
+          description: User Status
+          example: Active
+          enum:
+            - Active
+            - Inactive
+    Category:
+      type: object
+      properties:
+        category:
+          type: string
+          example: "Gà rán"
+    Item:
+      required:
+        - itemName
+        - category
+        - itemUrl
+      type: object
+      properties:
+        itemName:
+          type: string
+          example: "Khoai tây chiên"
+        category:
+          type: array
+          items:
+            type: string
+            example: "Món ăn kèm"
+        itemUrl:
+          type: string
+        description:
+          type: string
+          example: "Mô tả món ăn"
+        price:
+          type: integer
+        status:
+          type: string
+          description: Item Status
+          example: Active
+          enum:
+            - Active
+            - Inactive
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+  requestBodies:
+    Item:
+      description: Item object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Item"
+    User:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/User"
+    Order:
+      description: List of order object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Order"
+  securitySchemes:
+    petstore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+          scopes:
+            write:pets: modify pets in your account
+            read:pets: read your pets
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header

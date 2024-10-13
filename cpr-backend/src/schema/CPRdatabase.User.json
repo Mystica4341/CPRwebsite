@@ -2,10 +2,11 @@
   "_id": {
     "$oid": "670a4f8fa6ec19759e7f9897"
   },
+  "userId": 1,
   "username": "Admin",
   "password": "Pa$$w0rd",
   "email": "admin@example.com",
-  "phone_number": "1234567890",
+  "phoneNumber": "1234567890",
   "address": "123 Main St, Springfield, USA",
   "role": "admin",
   "status": "Active"
@@ -14,10 +15,11 @@
   "_id": {
     "$oid": "670a4f8fa6ec19759e7f9898"
   },
+  "userId": 2,
   "username": "Tiến Tài",
   "password": "Pa$$w0rd",
   "email": "tientai@example.com",
-  "phone_number": "1987654321",
+  "phoneNumber": "1987654321",
   "address": "456 Elm St, Springfield, USA",
   "role": "user",
   "status": "Active"
@@ -26,10 +28,11 @@
   "_id": {
     "$oid": "670a4f8fa6ec19759e7f9899"
   },
+  "userId": 3,
   "username": "Minh Thông",
   "password": "Pa$$w0rd",
   "email": "minhthong@example.com",
-  "phone_number": "1122334455",
+  "phoneNumber": "1122334455",
   "address": "789 Oak St, Springfield, USA",
   "role": "user",
   "status": "Active"
@@ -38,10 +41,11 @@
   "_id": {
     "$oid": "670a4f8fa6ec19759e7f989a"
   },
+  "userId": 4,
   "username": "Xuân Tỷ",
   "password": "Pa$$w0rd",
   "email": "xuanty@example.com",
-  "phone_number": "15551234567",
+  "phoneNumber": "15551234567",
   "address": "101 Pine St, Springfield, USA",
   "role": "user",
   "status": "Active"
@@ -50,10 +54,11 @@
   "_id": {
     "$oid": "670a4f8fa6ec19759e7f989b"
   },
+  "userId": 5,
   "username": "Sĩ Phú",
   "password": "Pa$$w0rd",
   "email": "siphu@example.com",
-  "phone_number": "1777888999",
+  "phoneNumber": "1777888999",
   "address": "202 Cedar St, Springfield, USA",
   "role": "user",
   "status": "Inactive"

@@ -1,13 +1,20 @@
 const mongoose = require('mongoose');
 
+//this is the all in one schema file for lazy person like me
 const userSchema = new mongoose.Schema({
+    userId: {
+        type: Number,
+        required: false,
+        Increament: true
+    },
     username: {
         type: String,
         required: true
     },
     password: {
         type: String,
-        required: true
+        required: false,
+        default: "Pa$$w0rd"
     },
     email: {
         type: String,
@@ -20,13 +27,23 @@ const userSchema = new mongoose.Schema({
     address: {
         type: String,
         required: true
+    },
+    status: {
+        type: String,
+        required: false,
+        default: "Active"
     }
 });
 
 const User = mongoose.model('User', userSchema);
 
 const itemSchema = new mongoose.Schema({
-    item_name: {
+    itemId:{
+        type: Number,
+        required: false,
+        Increament: true
+    },
+    itemName: {
         type: String,
         required: true
     },
@@ -40,17 +57,27 @@ const itemSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true
+        required: false
     },
     price: {
         type: Number,
-        required: true
+        required: false
+    }, 
+    status: {
+        type: String,
+        required: false,
+        default: "Active"
     }
 });
 
 const Item = mongoose.model('Item', itemSchema);
 
 const orderSchema = new mongoose.Schema({
+    orderId: {
+        type: Number,
+        required: false,
+        Increament: true
+    },
     username: {
         type: String,
         required: true
@@ -58,7 +85,7 @@ const orderSchema = new mongoose.Schema({
     order_date: {
         type: Date,
         default: Date.now,
-        required: true
+        required: false
     },
     items: [{
         item_name: {
@@ -76,7 +103,8 @@ const orderSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        required: true
+        required: false,
+        default: "Active"
     }
 });
 

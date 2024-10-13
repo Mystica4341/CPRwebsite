@@ -6,23 +6,24 @@ import { getAllUsers } from "../../services/UserService";
 
 export default function UserTable() {
     const [listUsers, setListUsers] = useState([
-        { Id: 1, Name: "John Doe", Email: "john@example.com", Status: 1 },
-        { Id: 2, Name: "Jane Smith", Email: "jane@example.com", Status: 0 }
+        { userId: 1, username: "John Doe", email: "john@example.com", status: "Active" },
+        { userId: 2, username: "Jane Smith", email: "jane@example.com", status: "Inactive" }
     ]); 
     const [totalPages, setTotalPages] = useState(2); 
     const [currentPage, setCurrentPage] = useState(1);
 
     // Fetch all users when the component is mounted
     useEffect(() => {
-        try{
-            getAllUsers().then((res) => {
-                if (res.statusCode === 200 && res.data) {
-                    setListUsers(res.data);
-                }
-            });
-        } catch (error) {
-            console.log("Error with fetching: ", error);
-        }
+        // try{
+        //     getAllUsers().then((res) => {
+        //         if (res.statusCode === 200 && res.data) {
+        //             setListUsers(res.data);
+        //             console.log("List users: ", res.data);
+        //         }
+        //     });
+        // } catch (error) {
+        //     console.log("Error with fetching: ", error);
+        // }
     }, [currentPage]);
 
     const handlePageClick = (event) => {
@@ -62,10 +63,10 @@ export default function UserTable() {
                             {listUsers.length > 0 ? (
                                 listUsers.map((item) => (
                                     <tr key={item.Id} className="border-t border-gray-200">
-                                        <td className="px-6 py-4 text-sm text-gray-900">{item.Id}</td>
-                                        <td className="px-6 py-4 text-sm text-gray-500">{item.Name}</td>
-                                        <td className="px-6 py-4 text-sm text-gray-500">{item.Email}</td>
-                                        <td className="px-6 py-4 text-sm text-gray-500">{item.Status === 1 ? "Active" : "Inactive"}</td>
+                                        <td className="px-6 py-4 text-sm text-gray-900">{item.userId}</td>
+                                        <td className="px-6 py-4 text-sm text-gray-500">{item.username}</td>
+                                        <td className="px-6 py-4 text-sm text-gray-500">{item.email}</td>
+                                        <td className="px-6 py-4 text-sm text-gray-500">{item.status}</td>
                                         <td className="px-6 py-4 text-right text-sm font-medium">
                                             <div className="flex float-right">
                                                 <GoPencil

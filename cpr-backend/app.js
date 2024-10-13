@@ -12,18 +12,15 @@ connectDB();
 const app = express();
 swagger(app);
 
-// Enable CORS
-app.use(cors({
-	origin: 'http://localhost:3000', // allow to server to accept request from different origin
-	methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-	credentials: true // allow session cookie from browser to pass through
-  }));
+//Middleware parse json
+app.use(express.json());
+
+app.use(cors());
 
 //Import Route
 app.use("/", require("./routes/hello"));
 app.use("/", require("./routes/userRoute"));
-app.use("/", require("./routes/itemRoute"));
-
+// app.use("/", require("./routes/itemRoute"));
 app.get("/", (req, res) => {
 	res.send("Hello World!");
 });
