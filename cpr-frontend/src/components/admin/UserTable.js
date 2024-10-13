@@ -5,26 +5,26 @@ import { GoPencil } from "react-icons/go";
 import { getAllUsers } from "../../services/UserService";
 
 export default function UserTable() {
-    const [listUsers, setListUsers] = useState([
-        { userId: 1, username: "John Doe", email: "john@example.com", status: "Active" },
-        { userId: 2, username: "Jane Smith", email: "jane@example.com", status: "Inactive" }
-    ]); 
+    const [listUsers, setListUsers] = useState([]); 
     const [totalPages, setTotalPages] = useState(2); 
     const [currentPage, setCurrentPage] = useState(1);
 
     // Fetch all users when the component is mounted
     useEffect(() => {
-        // try{
-        //     getAllUsers().then((res) => {
-        //         if (res.statusCode === 200 && res.data) {
-        //             setListUsers(res.data);
-        //             console.log("List users: ", res.data);
-        //         }
-        //     });
-        // } catch (error) {
-        //     console.log("Error with fetching: ", error);
-        // }
+        getUsers();
     }, [currentPage]);
+
+    // Fetch all users
+    const getUsers = async () => {
+        try{
+            let res = await getAllUsers();
+            if (res) {
+            setListUsers(res);
+            }
+        } catch (error) {
+            console.log("Error with fetching: ", error);
+        }
+    }
 
     const handlePageClick = (event) => {
         const selectedPage = event.selected + 1;
@@ -48,13 +48,14 @@ export default function UserTable() {
                         Add new User
                     </button>
                 </div>
-                <div className="overflow-x-auto">
+                <div className="">
                     <table className="min-w-full bg-white border border-gray-200">
                         <thead className="bg-gray-100">
                             <tr>
                                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">Id</th>
                                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">Name</th>
                                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">Email</th>
+                                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">Role</th>
                                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">Status</th>
                                 <th className="px-6 py-3 text-right text-sm font-semibold text-gray-600">Action</th>
                             </tr>
@@ -66,6 +67,7 @@ export default function UserTable() {
                                         <td className="px-6 py-4 text-sm text-gray-900">{item.userId}</td>
                                         <td className="px-6 py-4 text-sm text-gray-500">{item.username}</td>
                                         <td className="px-6 py-4 text-sm text-gray-500">{item.email}</td>
+                                        <td className="px-6 py-4 text-sm text-gray-500">{item.role}</td>
                                         <td className="px-6 py-4 text-sm text-gray-500">{item.status}</td>
                                         <td className="px-6 py-4 text-right text-sm font-medium">
                                             <div className="flex float-right">

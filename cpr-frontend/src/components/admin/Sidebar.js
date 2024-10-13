@@ -25,6 +25,10 @@ function Sidebar() {
 					<MdBorderColor className="inline-block h-5 w-5 mr-2" />
 					Order
 				</a>
+				<a href="/admin/Category" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+					<MdBorderColor className="inline-block h-5 w-5 mr-2" />
+					Category
+				</a>
 				<a href="#" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
 					<HiOutlineCog className="inline-block h-5 w-5 mr-2" />
 					Settings
