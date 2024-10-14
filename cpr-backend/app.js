@@ -20,7 +20,7 @@ app.use(cors());
 //Import Route
 app.use("/", require("./routes/hello"));
 app.use("/", require("./routes/userRoute"));
-// app.use("/", require("./routes/itemRoute"));
+app.use("/", require("./routes/itemRoute"));
 app.get("/", (req, res) => {
 	res.send("Hello World!");
 });

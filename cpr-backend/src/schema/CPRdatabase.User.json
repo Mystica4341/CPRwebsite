@@ -2,7 +2,6 @@
   "_id": {
     "$oid": "670a4f8fa6ec19759e7f9897"
   },
-  "userId": 1,
   "username": "Admin",
   "password": "Pa$$w0rd",
   "email": "admin@example.com",
@@ -15,7 +14,6 @@
   "_id": {
     "$oid": "670a4f8fa6ec19759e7f9898"
   },
-  "userId": 2,
   "username": "Tiến Tài",
   "password": "Pa$$w0rd",
   "email": "tientai@example.com",
@@ -28,7 +26,6 @@
   "_id": {
     "$oid": "670a4f8fa6ec19759e7f9899"
   },
-  "userId": 3,
   "username": "Minh Thông",
   "password": "Pa$$w0rd",
   "email": "minhthong@example.com",
@@ -41,7 +38,6 @@
   "_id": {
     "$oid": "670a4f8fa6ec19759e7f989a"
   },
-  "userId": 4,
   "username": "Xuân Tỷ",
   "password": "Pa$$w0rd",
   "email": "xuanty@example.com",
@@ -54,7 +50,6 @@
   "_id": {
     "$oid": "670a4f8fa6ec19759e7f989b"
   },
-  "userId": 5,
   "username": "Sĩ Phú",
   "password": "Pa$$w0rd",
   "email": "siphu@example.com",

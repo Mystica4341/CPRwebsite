@@ -36,5 +36,24 @@ userRouter.get('/api/user/:username', async (req, res) => {
   }
 });
 
+// create a user by name (POST request)
+/**
+ * @swagger
+ * /api/user:
+ */
+userRouter.post('/api/user', async (req, res) => {
+  const user = new User({
+    username: req.body.username,
+    email: req.body.email,
+    phoneNumber: req.body.phoneNumber,
+    address: req.body.address
+  });
+  try {
+    await user.save();
+    res.status(201).json(user);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
 
 module.exports = userRouter;

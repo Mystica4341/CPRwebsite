@@ -2,14 +2,10 @@ const mongoose = require('mongoose');
 
 //this is the all in one schema file for lazy person like me
 const userSchema = new mongoose.Schema({
-    userId: {
-        type: Number,
-        required: false,
-        Increament: true
-    },
     username: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
@@ -18,15 +14,21 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
-    phone_number: {
+    phoneNumber: {
         type: String,
         required: true
     },
     address: {
         type: String,
         required: true
+    },
+    role: {
+        type: String,
+        required: false,
+        default: "user"
     },
     status: {
         type: String,
@@ -38,22 +40,19 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 const itemSchema = new mongoose.Schema({
-    itemId:{
-        type: Number,
-        required: false,
-        Increament: true
-    },
     itemName: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     category: {
         type: [String],
         required: true
     },
-    item_url: {
+    itemUrl: {
         type: String,
-        required: true
+        required: false,
+        default: ""
     },
     description: {
         type: String,
@@ -82,13 +81,13 @@ const orderSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    order_date: {
+    orderDate: {
         type: Date,
         default: Date.now,
         required: false
     },
     items: [{
-        item_name: {
+        itemName: {
             type: String,
             required: true
         },

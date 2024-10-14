@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Swagger Petstore - OpenAPI 3.0
+  title: Swagger CPR - OpenAPI 3.0
   description: |-
     Đây là API của website CPR
   version: 1.0.1
@@ -25,11 +25,32 @@ paths:
       description: create a new Item
       operationId: createItem
       requestBody:
-        description: Create a new pet in the store
+        description: Create a new item
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Item"
+              required:
+                - itemName
+                - category
+                - itemUrl
+              type: object
+              properties:
+                itemName:
+                  type: string
+                  example: "Khoai Tây Chiên"
+                category:
+                  type: array
+                  items:
+                    type: string
+                    example: "Món ăn kèm"
+                itemUrl:
+                  type: string
+                  example: ""
+                description:
+                  type: string
+                  example: "Mô tả món ăn"
+                price:
+                  type: integer
         required: true
       responses:
         "200":
@@ -59,21 +80,20 @@ paths:
           description: Invalid ID supplied
         "404":
           description: Item not found
-  /api/item/{itemId}:
+  /api/item/{itemName}:
     put:
       tags:
         - Item
       summary: Update an existing Item
-      description: Update an existing Item by id
+      description: Update an existing Item by name
       operationId: updateItemById
       parameters:
-        - name: itemId
+        - name: itemName
           in: path
-          description: Id of an Item
+          description: name of an Item
           required: true
           schema:
-            type: integer
-            format: int64
+            type: string
       requestBody:
         description: Update an existent Item
         content:
@@ -89,55 +109,29 @@ paths:
               schema:
                 $ref: "#/components/schemas/Item"
         "400":
-          description: Invalid ID supplied
+          description: Invalid itemName supplied
         "404":
           description: Item not found
         "422":
           description: Validation exception
-    get:
-      tags:
-        - Item
-      summary: Find Item by Id
-      description: Returns a single Item
-      operationId: getItemById
-      parameters:
-        - name: itemId
-          in: path
-          description: Id of an Item
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Item"
-        "400":
-          description: Invalid ID supplied
-        "404":
-          description: Item not found
     delete:
       tags:
         - Item
       summary: Deletes an Item
-      description: delete an Item by Id
+      description: delete an Item by name
       operationId: deletePet
       parameters:
-        - name: itemId
+        - name: itemName
           in: path
-          description: Id of an Item
+          description: name of an Item
           required: true
           schema:
-            type: integer
-            format: int64
+            type: string
       responses:
         "200":
           description: successful operation
         "400":
-          description: Invalid ID supplies
+          description: Invalid itemName supplies
   /api/item/{term}:
     get:
       tags:
@@ -175,7 +169,28 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/User"
+              required:
+                - username
+                - email
+                - phoneNumber
+                - address
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: "Tiến Tài"
+                email:
+                  type: string
+                  example: tientai@example.com
+                password:
+                  type: string
+                  example: ""
+                phoneNumber:
+                  type: string
+                  example: "12345"
+                address:
+                  type: string
+                  example: "Thành phố HCM"
       responses:
         "201":
           description: Create user success
@@ -279,21 +294,19 @@ paths:
           description: Invalid username supplied
         "404":
           description: User not found
-  /api/user/{userId}:
     put:
       tags:
         - User
-      summary: Update user
+      summary: Update user by username
       description: This can only be done by the logged in user.
       operationId: updateUser
       parameters:
-        - name: userId
+        - name: username
           in: path
-          description: Id of user
+          description: "The username of the user"
           required: true
           schema:
-            type: integer
-            format: int64
+            type: string
       requestBody:
         description: Update an existent user in the store
         content:
@@ -303,20 +316,23 @@ paths:
       responses:
         "200":
           description: successful operation
+        "400":
+          description: Invalid username supplied
+        "404":
+          description: User not found
     delete:
       tags:
         - User
-      summary: Delete user
+      summary: Delete user by username
       description: This can only be done by the logged in user.
       operationId: deleteUser
       parameters:
-        - name: userId
+        - name: username
           in: path
-          description: Id of user
+          description: "The username of the user"
           required: true
           schema:
-            type: integer
-            format: int64
+            type: string
       responses:
         "200":
           description: successful operation
@@ -368,7 +384,7 @@ components:
           example: "Tiến Tài"
         email:
           type: string
-          example: tientai@email.com
+          example: tientai@example.com
         password:
           type: string
           example: "Pa$$w0rd"
@@ -406,7 +422,7 @@ components:
       properties:
         itemName:
           type: string
-          example: "Khoai tây chiên"
+          example: "Khoai Tây Chiên"
         category:
           type: array
           items:

@@ -2,7 +2,6 @@
   "_id": {
     "$oid": "670a531ea6ec19759e808e75"
   },
-  "itemId": 1,
   "itemName": "Gà Rán Original",
   "category": "Gà rán",
   "itemUrl": "",
@@ -14,7 +13,6 @@
   "_id": {
     "$oid": "670a531ea6ec19759e808e76"
   },
-  "itemId": 2,
   "itemName": "Gà Rán Spicy",
   "category": "Gà rán",
   "itemUrl": "",
@@ -26,7 +24,6 @@
   "_id": {
     "$oid": "670a531ea6ec19759e808e77"
   },
-  "itemId": 3,
   "itemName": "Combo Gà Rán 2 Miếng",
   "category": [
     "Gà rán",
@@ -42,7 +39,6 @@
   "_id": {
     "$oid": "670a531ea6ec19759e808e78"
   },
-  "itemId": 4,
   "itemName": "Burger Gà",
   "category": "Burger",
   "itemUrl": "",
@@ -54,7 +50,6 @@
   "_id": {
     "$oid": "670a531ea6ec19759e808e79"
   },
-  "itemId": 5,
   "itemName": "Burger Bò",
   "category": "Burger",
   "itemUrl": "",
@@ -66,7 +61,6 @@
   "_id": {
     "$oid": "670a531ea6ec19759e808e7a"
   },
-  "itemId": 6,
   "itemName": "Coca-Cola",
   "category": "Nước",
   "itemUrl": "",
@@ -78,7 +72,6 @@
   "_id": {
     "$oid": "670a531ea6ec19759e808e7b"
   },
-  "itemId": 7,
   "itemName": "Trà Đào",
   "category": "Nước",
   "itemUrl": "",
@@ -90,7 +83,6 @@
   "_id": {
     "$oid": "670a531ea6ec19759e808e7c"
   },
-  "itemId": 8,
   "itemName": "Khoai Tây Chiên",
   "category": "Món ăn kèm",
   "itemUrl": "",
@@ -102,7 +94,6 @@
   "_id": {
     "$oid": "670a531ea6ec19759e808e7d"
   },
-  "itemId": 9,
   "itemName": "Salad Trộn",
   "category": "Món ăn kèm",
   "itemUrl": "",
@@ -114,7 +105,6 @@
   "_id": {
     "$oid": "670a531ea6ec19759e808e7e"
   },
-  "itemId": 10,
   "itemName": "Kem Vani",
   "category": "Món tráng miệng",
   "itemUrl": "",
@@ -126,7 +116,6 @@
   "_id": {
     "$oid": "670a531ea6ec19759e808e7f"
   },
-  "itemId": 11,
   "itemName": "Kem Sô-cô-la",
   "category": "Món tráng miệng",
   "itemUrl": "",
@@ -138,7 +127,6 @@
   "_id": {
     "$oid": "670a531ea6ec19759e808e80"
   },
-  "itemId": 12,
   "itemName": "Combo Gà Rán 3 Miếng",
   "category": [
     "Gà rán",
@@ -154,7 +142,6 @@
   "_id": {
     "$oid": "670a531ea6ec19759e808e81"
   },
-  "itemId": 13,
   "itemName": "Combo Burger Gà",
   "category": [
     "Burger",
@@ -170,7 +157,6 @@
   "_id": {
     "$oid": "670a531ea6ec19759e808e82"
   },
-  "itemId": 14,
   "itemName": "Combo Gia Đình",
   "category": [
     "Gà rán",
@@ -186,7 +172,6 @@
   "_id": {
     "$oid": "670a531ea6ec19759e808e83"
   },
-  "itemId": 15,
   "itemName": "Phô Mai Que",
   "category": "Món ăn kèm",
   "itemUrl": "",
