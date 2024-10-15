@@ -28,4 +28,5 @@ export const combo = [
         originalPrice: 130000,
 
     },
+    
 ];

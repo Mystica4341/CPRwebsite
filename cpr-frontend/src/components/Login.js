@@ -23,7 +23,7 @@ export default function Login() {
 
         <div className="flex justify-center">
           <img
-            src="https://imgur.com/AGqTqcW.jpeg" // Replace with your logo or icon
+            src="https://i.imgur.com/HxUij9o.jpg" // Replace with your logo or icon
             alt="BESTSELLER"
             className="h-16 w-auto mb-4"
           />

@@ -31,18 +31,24 @@ export default function Header() {
         <IoSearchSharp className="justify-center my-auto text-2xl pr-1" />
       </div>
 
-      <div className="flex space-x-4 text-xl pr-3 items-center">
-  <div className="relative">
-    <MdAddShoppingCart className="my-auto mr-9 cursor-pointer hover:text-red-500" onClick={() => navigate("/cart")} />
-    {getCartQuantity() > 0 && (
-      <span className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 text-sm flex justify-center items-center">
-        {getCartQuantity()}
-      </span>
-    )}
-  </div>
-  <FaRegUser className="my-auto cursor-pointer hover:text-red-500" onClick={() => navigate("/login")} />
-</div>
-
-    </div>
+      {/* Cart and user icon */}
+      <div className="flex space-x-4 text-xl items-center pr-10 ">
+            <div className="relative ml-7">
+              <MdAddShoppingCart
+                className="cursor-pointer hover:text-blue-500"
+                onClick={() => navigate("/cart")}
+              />
+              {getCartQuantity() > 0 && (
+                <span className="absolute bottom-4 left-3 bg-red-500 text-white rounded-full w-4 h-4 text-sm flex justify-center items-center">
+                  {getCartQuantity()}
+                </span>
+              )}
+            </div>
+            <FaRegUser
+              className="cursor-pointer hover:text-blue-500 "
+              onClick={() => navigate("/login")}
+            />
+          </div>
+        </div>
   );
 }
