@@ -1,29 +1,31 @@
+// src/components/admin/OrderTable.js
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { FaTrashAlt } from "react-icons/fa";
 import { GoPencil } from "react-icons/go";
-import { getAllUsers } from "../../services/UserService";
+import { getAllOrders } from "../../services/OrderService"; // Đảm bảo rằng bạn đã tạo OrderService.js
 
-export default function UserTable() {
-  const [listUsers, setListUsers] = useState([]);
+export default function OrderTable() {
+  const [listOrders, setListOrders] = useState([]);
   const [totalPages, setTotalPages] = useState(2);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Fetch all users when the component is mounted
-  // Fetch all users when the component is mounted
+  // Fetch all orders when the component is mounted
   useEffect(() => {
-    getUsers();
+    getOrders();
   }, [currentPage]);
 
-  // Fetch all users
-  const getUsers = async () => {
+  // Fetch all orders
+  const getOrders = async () => {
     try {
-      let res = await getAllUsers();
+      let res = await getAllOrders(); // Đảm bảo rằng bạn đã định nghĩa hàm này trong OrderService.js
       if (res) {
-        setListUsers(res);
+        setListOrders(res);
+        // Bạn có thể cập nhật tổng số trang ở đây nếu API trả về thông tin này
+        setTotalPages(Math.ceil(res.length / 10)); // Thay đổi 10 thành số mục mỗi trang mà bạn muốn
       }
     } catch (error) {
-      console.log("Error with fetching: ", error);
+      console.log("Error with fetching orders: ", error);
     }
   };
 
@@ -32,21 +34,21 @@ export default function UserTable() {
     setCurrentPage(selectedPage);
   };
 
-  const handleEditUser = (user) => {
-    console.log("Edit user: ", user);
+  const handleEditOrder = (order) => {
+    console.log("Edit order: ", order);
   };
 
-  const handleDeleteUser = (user) => {
-    console.log("Delete user: ", user);
+  const handleDeleteOrder = (order) => {
+    console.log("Delete order: ", order);
   };
 
   return (
     <>
       <div className="p-4">
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold">User Table</h1>
+          <h1 className="text-2xl font-bold">Order Table</h1>
           <button className="bg-sky-400 text-white px-4 py-2 rounded-md">
-            Add new User
+            Add new Order
           </button>
         </div>
         <div className="">
@@ -54,16 +56,16 @@ export default function UserTable() {
             <thead className="bg-gray-100">
               <tr>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                  Id
+                  Order ID
                 </th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                  Name
+                  User ID
                 </th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                  Email
+                  Order Date
                 </th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                  Role
+                  Total Amount
                 </th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
                   Status
@@ -72,20 +74,20 @@ export default function UserTable() {
               </tr>
             </thead>
             <tbody>
-              {listUsers.length > 0 ? (
-                listUsers.map((item) => (
-                  <tr key={item.Id} className="border-t border-gray-200">
+              {listOrders.length > 0 ? (
+                listOrders.map((item) => (
+                  <tr key={item.order_id} className="border-t border-gray-200">
                     <td className="px-6 py-4 text-sm text-gray-900">
-                      {item.userId}
+                      {item.order_id}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-500">
-                      {item.username}
+                      {item.user_id}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-500">
-                      {item.email}
+                      {new Date(item.order_date).toLocaleDateString()}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-500">
-                      {item.role}
+                      {item.total_amount}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-500">
                       {item.status}
@@ -94,11 +96,11 @@ export default function UserTable() {
                       <div className="flex float-right">
                         <GoPencil
                           className="text-xl text-yellow-400 hover:text-yellow-200 mr-5"
-                          onClick={() => handleEditUser(item)}
+                          onClick={() => handleEditOrder(item)}
                         />
                         <FaTrashAlt
                           className="text-xl text-red-400 hover:text-red-200"
-                          onClick={() => handleDeleteUser(item)}
+                          onClick={() => handleDeleteOrder(item)}
                         />
                       </div>
                     </td>
@@ -107,10 +109,10 @@ export default function UserTable() {
               ) : (
                 <tr>
                   <td
-                    colSpan="5"
+                    colSpan="6"
                     className="px-6 py-4 text-center text-sm text-gray-500"
                   >
-                    No Users available.
+                    No Orders available.
                   </td>
                 </tr>
               )}

@@ -2,28 +2,26 @@ import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { FaTrashAlt } from "react-icons/fa";
 import { GoPencil } from "react-icons/go";
-import { getAllUsers } from "../../services/UserService";
+import { getAllCategories } from "../../services/CategoryService"; // Đã import CategoryService đúng cách
 
-export default function UserTable() {
-  const [listUsers, setListUsers] = useState([]);
-  const [totalPages, setTotalPages] = useState(2);
+export default function CategoryTable() {
+  const [listCategories, setListCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Fetch all users when the component is mounted
-  // Fetch all users when the component is mounted
+  // Fetch categories when the component is mounted
   useEffect(() => {
-    getUsers();
+    getCategories();
   }, [currentPage]);
 
-  // Fetch all users
-  const getUsers = async () => {
+  // Fetch all categories
+  const getCategories = async () => {
     try {
-      let res = await getAllUsers();
+      let res = await getAllCategories(); // Gọi API để lấy danh sách category
       if (res) {
-        setListUsers(res);
+        setListCategories(res);
       }
     } catch (error) {
-      console.log("Error with fetching: ", error);
+      console.log("Error with fetching categories: ", error);
     }
   };
 
@@ -32,21 +30,21 @@ export default function UserTable() {
     setCurrentPage(selectedPage);
   };
 
-  const handleEditUser = (user) => {
-    console.log("Edit user: ", user);
+  const handleEditCategory = (category) => {
+    console.log("Edit category: ", category);
   };
 
-  const handleDeleteUser = (user) => {
-    console.log("Delete user: ", user);
+  const handleDeleteCategory = (category) => {
+    console.log("Delete category: ", category);
   };
 
   return (
     <>
       <div className="p-4">
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold">User Table</h1>
+          <h1 className="text-2xl font-bold">Category Table</h1>
           <button className="bg-sky-400 text-white px-4 py-2 rounded-md">
-            Add new User
+            Add new Category
           </button>
         </div>
         <div className="">
@@ -54,51 +52,35 @@ export default function UserTable() {
             <thead className="bg-gray-100">
               <tr>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                  Id
+                  Category ID
                 </th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                  Name
+                  Category Name
                 </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                  Email
-                </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                  Role
-                </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                  Status
-                </th>
-                <th className="px-6 py-3 text-right text-sm font-semibold text-gray-600"></th>
               </tr>
             </thead>
             <tbody>
-              {listUsers.length > 0 ? (
-                listUsers.map((item) => (
-                  <tr key={item.Id} className="border-t border-gray-200">
+              {listCategories.length > 0 ? (
+                listCategories.map((category) => (
+                  <tr
+                    key={category.category_id}
+                    className="border-t border-gray-200"
+                  >
                     <td className="px-6 py-4 text-sm text-gray-900">
-                      {item.userId}
+                      {category.category_id}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-500">
-                      {item.username}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-500">
-                      {item.email}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-500">
-                      {item.role}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-500">
-                      {item.status}
+                      {category.category_name}
                     </td>
                     <td className="px-6 py-4 text-right text-sm font-medium">
                       <div className="flex float-right">
                         <GoPencil
                           className="text-xl text-yellow-400 hover:text-yellow-200 mr-5"
-                          onClick={() => handleEditUser(item)}
+                          onClick={() => handleEditCategory(category)}
                         />
                         <FaTrashAlt
                           className="text-xl text-red-400 hover:text-red-200"
-                          onClick={() => handleDeleteUser(item)}
+                          onClick={() => handleDeleteCategory(category)}
                         />
                       </div>
                     </td>
@@ -107,10 +89,10 @@ export default function UserTable() {
               ) : (
                 <tr>
                   <td
-                    colSpan="5"
+                    colSpan="3"
                     className="px-6 py-4 text-center text-sm text-gray-500"
                   >
-                    No Users available.
+                    No Categories available.
                   </td>
                 </tr>
               )}
@@ -122,7 +104,7 @@ export default function UserTable() {
         previousLabel={<span className="text-gray-500">← Previous</span>}
         nextLabel={<span className="text-gray-500">Next →</span>}
         breakLabel="..."
-        pageCount={totalPages}
+        pageCount={2} // Số lượng trang đã được chỉnh lại nếu cần
         marginPagesDisplayed={2}
         pageRangeDisplayed={5}
         onPageChange={handlePageClick}

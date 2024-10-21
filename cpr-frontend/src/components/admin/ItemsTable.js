@@ -2,28 +2,27 @@ import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { FaTrashAlt } from "react-icons/fa";
 import { GoPencil } from "react-icons/go";
-import { getAllUsers } from "../../services/UserService";
+import { getAllItems } from "../../services/ItemService"; // Đảm bảo rằng bạn đã tạo một service để lấy danh sách items
 
-export default function UserTable() {
-  const [listUsers, setListUsers] = useState([]);
-  const [totalPages, setTotalPages] = useState(2);
+export default function ItemTable() {
+  const [listItems, setListItems] = useState([]);
+  const [totalPages, setTotalPages] = useState(2); // Bạn có thể cập nhật totalPages nếu cần
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Fetch all users when the component is mounted
-  // Fetch all users when the component is mounted
+  // Fetch all items when the component is mounted
   useEffect(() => {
-    getUsers();
+    getItems();
   }, [currentPage]);
 
-  // Fetch all users
-  const getUsers = async () => {
+  // Fetch all items
+  const getItems = async () => {
     try {
-      let res = await getAllUsers();
+      let res = await getAllItems(); // Gọi API để lấy danh sách items
       if (res) {
-        setListUsers(res);
+        setListItems(res);
       }
     } catch (error) {
-      console.log("Error with fetching: ", error);
+      console.log("Error with fetching items: ", error);
     }
   };
 
@@ -32,73 +31,83 @@ export default function UserTable() {
     setCurrentPage(selectedPage);
   };
 
-  const handleEditUser = (user) => {
-    console.log("Edit user: ", user);
+  const handleEditItem = (item) => {
+    console.log("Edit item: ", item);
   };
 
-  const handleDeleteUser = (user) => {
-    console.log("Delete user: ", user);
+  const handleDeleteItem = (item) => {
+    console.log("Delete item: ", item);
   };
 
   return (
     <>
       <div className="p-4">
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold">User Table</h1>
+          <h1 className="text-2xl font-bold">Item Table</h1>
           <button className="bg-sky-400 text-white px-4 py-2 rounded-md">
-            Add new User
+            Add new Item
           </button>
         </div>
-        <div className="">
+        <div>
           <table className="min-w-full bg-white border border-gray-200">
             <thead className="bg-gray-100">
               <tr>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                  Id
+                  Item ID
                 </th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                  Name
+                  Category ID
                 </th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                  Email
+                  Item Name
                 </th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                  Role
+                  Description
                 </th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                  Status
+                  Price
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+                  Image
                 </th>
                 <th className="px-6 py-3 text-right text-sm font-semibold text-gray-600"></th>
               </tr>
             </thead>
             <tbody>
-              {listUsers.length > 0 ? (
-                listUsers.map((item) => (
-                  <tr key={item.Id} className="border-t border-gray-200">
+              {listItems.length > 0 ? (
+                listItems.map((item) => (
+                  <tr key={item.item_id} className="border-t border-gray-200">
                     <td className="px-6 py-4 text-sm text-gray-900">
-                      {item.userId}
+                      {item.item_id}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-500">
-                      {item.username}
+                      {item.category_id}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-500">
-                      {item.email}
+                      {item.item_name}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-500">
-                      {item.role}
+                      {item.description}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-500">
-                      {item.status}
+                      {item.price}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-500">
+                      <img
+                        src={item.image_url}
+                        alt={item.item_name}
+                        className="w-16 h-16 object-cover"
+                      />
                     </td>
                     <td className="px-6 py-4 text-right text-sm font-medium">
                       <div className="flex float-right">
                         <GoPencil
                           className="text-xl text-yellow-400 hover:text-yellow-200 mr-5"
-                          onClick={() => handleEditUser(item)}
+                          onClick={() => handleEditItem(item)}
                         />
                         <FaTrashAlt
                           className="text-xl text-red-400 hover:text-red-200"
-                          onClick={() => handleDeleteUser(item)}
+                          onClick={() => handleDeleteItem(item)}
                         />
                       </div>
                     </td>
@@ -107,10 +116,10 @@ export default function UserTable() {
               ) : (
                 <tr>
                   <td
-                    colSpan="5"
+                    colSpan="7"
                     className="px-6 py-4 text-center text-sm text-gray-500"
                   >
-                    No Users available.
+                    No Items available.
                   </td>
                 </tr>
               )}
