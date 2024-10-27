@@ -109,4 +109,14 @@ const orderSchema = new mongoose.Schema({
 
 const Order = mongoose.model('Order', orderSchema);
 
-module.exports = {User, Item, Order};
+const categorySchema = new mongoose.Schema({
+    categoryName: {
+        type: String,
+        required: true,
+        unique: true
+    }
+});
+
+const Category = mongoose.model('Category', categorySchema);
+
+module.exports = {User, Item, Order, Category};
