@@ -4,10 +4,10 @@ import Menu from "./components/menu/Menu";
 import Cart from "./components/cart/Carts";
 import AboutUs from "./components/AboutUs";
 // Import thêm các thành phần admin
-import UserTable from "./components/admin/UserTable";
-import ItemsTable from "./components/admin/ItemsTable";
-import CategoryTable from "./components/admin/CategoryTable";
-import OrderTable from "./components/admin/OrderTable";
+import UserTable from "./components/admin/user/UserTable";
+import ItemsTable from "./components/admin/item/ItemsTable";
+import CategoryTable from "./components/admin/category/CategoryTable";
+import OrderTable from "./components/admin/order/OrderTable";
 import SettingTable from "./components/admin/SettingTable";
 import Login from "./components/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
