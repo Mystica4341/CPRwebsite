@@ -1,14 +1,24 @@
 // src/services/ItemService.js
-import axios from "axios";
+import axios from "./custom_axios";
 
-const API_URL = "http://your-api-url.com/api/items"; // Thay đổi URL thành API của bạn
-
-export const getAllItems = async () => {
-  try {
-    const response = await axios.get(API_URL);
-    return response.data; // Giả sử API trả về dữ liệu trong response.data
-  } catch (error) {
-    console.error("Error fetching items:", error);
-    throw error; // Để xử lý lỗi ở nơi gọi
-  }
+const getAllItems = async (searchTerm, page) => {
+  return await axios.get(`api/item?searchTerm=${searchTerm}&page=${page}&limit=5`);
 };
+
+const getItem = async (itemId) => {
+  return await axios.get(`api/item/${itemId}`);
+};
+
+const addItem = async (itemName, category, itemUrl, description, price, status) => {
+  return await axios.post("api/item", { itemName, category, itemUrl, description, price, status });
+};
+
+const updateItem = async (itemId, itemName, category, itemUrl, description, price, status) => {
+  return await axios.put(`api/item/${itemId}`, { itemName, category, itemUrl, description, price, status });
+};
+
+const deleteItem = async (itemId) => {
+  return await axios.delete(`api/item/${itemId}`);
+};
+
+export { getAllItems, getItem, addItem, updateItem, deleteItem };
