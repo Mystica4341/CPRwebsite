@@ -8,7 +8,8 @@
   "phoneNumber": "1234567890",
   "address": "123 Main St, Springfield, USA",
   "role": "admin",
-  "status": "Active"
+  "status": "Active",
+  "__v": 0
 },
 {
   "_id": {
@@ -20,7 +21,8 @@
   "phoneNumber": "1987654321",
   "address": "456 Elm St, Springfield, USA",
   "role": "user",
-  "status": "Active"
+  "status": "Active",
+  "__v": 0
 },
 {
   "_id": {
@@ -32,7 +34,8 @@
   "phoneNumber": "1122334455",
   "address": "789 Oak St, Springfield, USA",
   "role": "user",
-  "status": "Active"
+  "status": "Active",
+  "__v": 0
 },
 {
   "_id": {
@@ -44,7 +47,8 @@
   "phoneNumber": "15551234567",
   "address": "101 Pine St, Springfield, USA",
   "role": "user",
-  "status": "Active"
+  "status": "Active",
+  "__v": 0
 },
 {
   "_id": {
@@ -56,5 +60,6 @@
   "phoneNumber": "1777888999",
   "address": "202 Cedar St, Springfield, USA",
   "role": "user",
-  "status": "Inactive"
+  "status": "Inactive",
+  "__v": 0
 }]

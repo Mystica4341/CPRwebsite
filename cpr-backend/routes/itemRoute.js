@@ -1,3 +1,4 @@
+// routes/itemRoute.js
 const express = require('express');
 const {Item} = require('../src/schema/cprSchema');
 const itemRouter = express.Router();
@@ -5,14 +6,47 @@ const itemRouter = express.Router();
 // Get all items (GET request)
 /**
  * @swagger
+ * /api/item/all:
+ */
+itemRouter.get('/api/item/all', async (req, res) => {
+  try {
+    const items = await Item.find(); // find all items
+    return res.status(200).json(items);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+});
+
+// Get all items with searchTerm and Paging (GET request)
+/**
+ * @swagger
  * /api/item:
  */
 itemRouter.get('/api/item', async (req, res) => {
-  try {
-    const items = await Item.find(); // find all items
-    res.status(200).json(items);
+  try{
+    const searchTerm = req.query.searchTerm || ""; // Default search term is empty
+    const page = parseInt(req.query.page) || 1; // Default page is 1
+    const limit = parseInt(req.query.limit) || 5; // Default limit is 5 per page
+    const skip = (page - 1) * limit; // Calculate skip
+
+    const regex = new RegExp(searchTerm, 'i'); // Create a case-insensitive regex
+    const items = await Item.find({ $or: [{ category: { $regex: regex }}, { itemName: { $regex: regex }}]}).limit(limit).skip(skip); // Find items by name or category with limit and skip
+    if (!items) {
+      return res.status(404).json({ message: 'Item not found' });
+    }
+
+    // Count total
+    const totalItems = await Item.countDocuments({ $or: [{ category: { $regex: regex }}, { itemName: { $regex: regex }}]}); // Count total items
+    const totalPages = Math.ceil(totalItems / limit); // Calculate total pages
+    return res.status(200).json({ 
+      totalItems: totalItems,
+      Size: limit,
+      currentPage: page,
+      totalPages: totalPages,
+      data: items
+    });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 });
 
@@ -29,12 +63,13 @@ itemRouter.get('/api/item/:term', async (req, res) => {
     if (!item) {
       return res.status(404).json({ message: 'Item not found' });
     }
-    res.status(200).json(item);
+    return res.status(200).json(item);
   } catch (error) {
-    res.status(500).json({ message: error.message });
-}});
+    return res.status(500).json({ message: error.message });
+  }
+});
 
-// Add a new item (POST request)
+// Create a new item (POST request)
 /**
  * @swagger
  * /api/item:
@@ -49,10 +84,11 @@ itemRouter.post('/api/item', async (req, res) => {
   });
   try {
     await item.save();
-    res.status(201).json(item);
+    return res.status(201).json(item);
   } catch (error) {
-    res.status(400).json({ message: error.message });
-}});
+    return res.status(400).json({ message: error.message });
+  }
+});
 
 // Update an item by name (PUT request)
 /**
@@ -73,10 +109,11 @@ itemRouter.put('/api/item/:itemName', async (req, res) => {
     item.description = req.body.description;
     item.price = req.body.price;
     await item.save();
-    res.status(200).json(item);
+    return res.status(200).json(item);
   } catch (error) {
-    res.status(500).json({ message: error.message });
-}});
+    return res.status(500).json({ message: error.message });
+  }
+});
 
 // Delete an item by name (DELETE request)
 /**
@@ -92,9 +129,10 @@ itemRouter.delete('/api/item/:itemName', async (req, res) => {
       return res.status(404).json({ message: 'Item not found' });
     }
     await Item.deleteOne({ itemName: { $regex: regex }}); //Delete item by name
-    res.status(200).json({ message: 'Item deleted' });
+    return res.status(200).json({ message: 'Item deleted' });
   } catch (error) {
-    res.status(500).json({ message: error.message });
-}});
+    return res.status(500).json({ message: error.message });
+  }
+});
 
 module.exports = itemRouter;

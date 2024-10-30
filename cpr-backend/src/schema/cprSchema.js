@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { or } = require('sequelize');
 
 //this is the all in one schema file for lazy person like me
 const userSchema = new mongoose.Schema({
@@ -74,8 +75,8 @@ const Item = mongoose.model('Item', itemSchema);
 const orderSchema = new mongoose.Schema({
     orderId: {
         type: Number,
-        required: false,
-        Increament: true
+        required: true,
+        unique: true
     },
     username: {
         type: String,
@@ -83,7 +84,13 @@ const orderSchema = new mongoose.Schema({
     },
     orderDate: {
         type: Date,
-        default: Date.now,
+        default: () => {
+            const date = new Date();
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+        },
         required: false
     },
     items: [{

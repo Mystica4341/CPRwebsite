@@ -6,6 +6,13 @@ const categoryRouter = express.Router();
 // Get all categories (GET request)
 /**
  * @swagger
+ * /api/category/all:
+ */
+
+
+// Get all categories with searchTerm and Paging (GET request)
+/**
+ * @swagger
  * /api/category:
  */
 

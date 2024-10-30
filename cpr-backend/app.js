@@ -21,6 +21,8 @@ app.use(cors());
 app.use("/", require("./routes/hello"));
 app.use("/", require("./routes/userRoute"));
 app.use("/", require("./routes/itemRoute"));
+app.use("/", require("./routes/orderRoute"));
+app.use("/", require("./routes/categoryRoute"));
 app.get("/", (req, res) => {
 	res.send("Hello World!");
 });

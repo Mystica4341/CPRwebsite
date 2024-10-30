@@ -8,19 +8,20 @@ export default function UserTable() {
   const [listUsers, setListUsers] = useState([]);
   const [totalPages, setTotalPages] = useState(2);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Fetch all users when the component is mounted
-  // Fetch all users when the component is mounted
   useEffect(() => {
-    getUsers();
+    getUsers(searchTerm, currentPage);
   }, [currentPage]);
 
   // Fetch all users
-  const getUsers = async () => {
+  const getUsers = async (searchTerm, page) => {
     try {
-      let res = await getAllUsers();
+      let res = await getAllUsers(searchTerm, page);
       if (res) {
-        setListUsers(res);
+        setListUsers(res.data);
+        setTotalPages(res.totalPages);
       }
     } catch (error) {
       console.log("Error with fetching: ", error);
@@ -40,43 +41,56 @@ export default function UserTable() {
     console.log("Delete user: ", user);
   };
 
+  const handelAddUser = () => {
+    console.log("Add new user");
+  };
+
+  const handleSearch = (event) => {
+		let term = event.target.value;
+		if (term) {
+			getUsers(term, currentPage);
+		} else {
+			getUsers(searchTerm, currentPage);
+		}
+	};
+
   return (
     <>
       <div className="p-4">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">User Table</h1>
-          <button className="bg-sky-400 text-white px-4 py-2 rounded-md">
+          <button onClick={handelAddUser} className="bg-sky-400 text-white px-4 py-2 rounded-md">
             Add new User
           </button>
         </div>
+        <div className="flex justify-start mt-4 mb-4">
+					<input
+						id="searchTerm"
+						name="searchTerm"
+						type="text"
+						placeholder="Search User here..."
+						onChange={(event) => handleSearch(event)}
+						className="block w-60 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-400 sm:text-sm sm:leading-6 pl-3"
+					/>
+				</div>
         <div className="">
           <table className="min-w-full bg-white border border-gray-200">
             <thead className="bg-gray-100">
               <tr>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                  Id
-                </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                  Name
-                </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                  Email
-                </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                  Role
-                </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                  Status
-                </th>
-                <th className="px-6 py-3 text-right text-sm font-semibold text-gray-600"></th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">Id</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">Name</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">Email</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">Role</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">Status</th>
+                <th className="px-6 py-3 text-right text-sm font-semibold text-gray-600">Action</th>
               </tr>
             </thead>
             <tbody>
               {listUsers.length > 0 ? (
-                listUsers.map((item) => (
-                  <tr key={item.Id} className="border-t border-gray-200">
+                listUsers.map((item, index) => (
+                  <tr key={index} className="border-t border-gray-200">
                     <td className="px-6 py-4 text-sm text-gray-900">
-                      {item.userId}
+                      {index + 1}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-500">
                       {item.username}
@@ -108,8 +122,7 @@ export default function UserTable() {
                 <tr>
                   <td
                     colSpan="5"
-                    className="px-6 py-4 text-center text-sm text-gray-500"
-                  >
+                    className="px-6 py-4 text-center text-sm text-gray-500">
                     No Users available.
                   </td>
                 </tr>
@@ -127,7 +140,7 @@ export default function UserTable() {
         pageRangeDisplayed={5}
         onPageChange={handlePageClick}
         containerClassName="flex justify-center mt-4 space-x-2"
-        pageClassName="text-white-700 hover:bg-sky-200 rounded-full w-8 h-8 flex items-center justify-center"
+        pageClassName="text-white-700 hover:bg-sky-200 rounded-full w-8 h-8 flex items-center justify-center my-auto"
         activeClassName="bg-sky-400 text-white rounded-full"
       />
     </>
