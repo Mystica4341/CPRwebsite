@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { FaTrashAlt } from "react-icons/fa";
 import { GoPencil } from "react-icons/go";
-import { getAllOrders } from "../../services/OrderService"; // Đảm bảo rằng bạn đã tạo OrderService.js
+import { getAllOrders } from "../../../services/OrderService"; // Đảm bảo rằng bạn đã tạo OrderService.js
 
 export default function OrderTable() {
   const [listOrders, setListOrders] = useState([]);

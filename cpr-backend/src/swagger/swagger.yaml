@@ -503,7 +503,7 @@ paths:
         - Category
       summary: Get all Categories with searchTerm and paging
       description: Returns a list of categories
-      operationId: getAllCategories
+      operationId: getAllCategoriesWithPaging
       parameters:
         - name: searchTerm
           in: query

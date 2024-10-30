@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { FaTrashAlt } from "react-icons/fa";
 import { GoPencil } from "react-icons/go";
-import { getAllUsers } from "../../services/UserService";
+import { getAllUsers } from "../../../services/UserService";
 
 export default function UserTable() {
   const [listUsers, setListUsers] = useState([]);
