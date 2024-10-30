@@ -249,7 +249,7 @@ paths:
                   example: ""
                 phoneNumber:
                   type: string
-                  example: 0907778777
+                  example: "0907778777"
                 address:
                   type: string
                   example: Thành phố HCM
@@ -417,7 +417,7 @@ paths:
                   example: ""
                 phoneNumber:
                   type: string
-                  example: 0907778777
+                  example: "0907778777"
                 address:
                   type: string
                   example: Thành phố HCM
