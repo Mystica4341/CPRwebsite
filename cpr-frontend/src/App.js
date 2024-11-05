@@ -3,6 +3,8 @@ import Home from "./components/home/Home";
 import Menu from "./components/menu/Menu";
 import Cart from "./components/cart/Carts";
 import AboutUs from "./components/AboutUs";
+import Payment from "./components/payment/payment";
+import Confirm from "./components/confirm/confirm";
 // Import thêm các thành phần admin
 import UserTable from "./components/admin/user/UserTable";
 import ItemsTable from "./components/admin/item/ItemsTable";
@@ -24,6 +26,8 @@ function App() {
           <Route path="/" element={<ClientRoute children={<Home />} />} />
           <Route path="/menu" element={<ClientRoute children={<Menu />} />} />
           <Route path="/cart" element={<ClientRoute children={<Cart />} />} />
+          <Route path="/payment" element={<ClientRoute children={<Payment />} />} />
+          <Route path="/confirm" element={<ClientRoute children={<Confirm />} />} />
           <Route
             path="/AboutUs"
             element={<ClientRoute children={<AboutUs />} />}

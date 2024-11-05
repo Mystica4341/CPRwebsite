@@ -61,3 +61,8 @@ export const categories = [
     { id: "miy", name: "Mì Ý", link: "/Miy" },
     { id: "thucuong", name: "Thức Uống", link: "/Thucuong" },
   ];
+  export const districtData = {
+    "Hà Nội": ["Ba Đình", "Hoàn Kiếm", "Tây Hồ", "Đống Đa"],
+    "Hồ Chí Minh": ["Quận 1", "Quận 2", "Quận 3", "Quận 4"],
+    "Đà Nẵng": ["Hải Châu", "Sơn Trà", "Ngũ Hành Sơn", "Liên Chiểu"],
+  };
