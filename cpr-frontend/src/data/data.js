@@ -59,7 +59,7 @@ export const categories = [
     { id: "garan", name: "Gà Rán", link: "/Garan" },
     { id: "burger", name: "Burger", link: "/Burger" },
     { id: "miy", name: "Mì Ý", link: "/Miy" },
-    { id: "thucuong", name: "Thức Uống", link: "/Thucuong" },
+    { id: "thucuong", name: "Nước", link: "/Thucuong" },
   ];
   export const districtData = {
     "Hà Nội": ["Ba Đình", "Hoàn Kiếm", "Tây Hồ", "Đống Đa"],

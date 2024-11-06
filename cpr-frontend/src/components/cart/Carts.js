@@ -44,7 +44,7 @@ export default function Carts() {
           <div key={item.id} className="flex justify-between items-center p-4 border-b">
             <div className="flex items-center">
               <img
-                src={`assets/${item.id}.jpg`}
+                src={item.itemUrl}
                 alt={item.name}
                 className="h-16 w-16 object-cover mr-4"
               />

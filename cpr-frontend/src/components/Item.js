@@ -8,6 +8,7 @@ export default function ItemsList(props) {
   const handleAddToCart = () => {
     const product = {
       id: props.id,
+      itemUrl: props.itemUrl,
       name: props.name,
       price: props.price,
       description: props.description,
@@ -20,16 +21,16 @@ export default function ItemsList(props) {
   return (
     <div className="flex flex-col h-full w-full max-w-xs"> {/* Ensure max height and width */}
       <div
-        key={props.id}
+        key={props.index}
         className="border border-gray-300 rounded-lg shadow-md h-full flex flex-col"
       >
         <div className="relative flex-grow"> {/* Flex-grow for full image height */}
           {/* Dynamically load combo image based on ID */}
-          <Link to={`/detailproduct/${props.id}`}>
+          <Link to={`/product/${props.itemName}`}>
             <img
-              src={`assets/${props.id}.jpg`}
+              src={`${props.itemUrl}`}
               alt={props.name}
-              className="w-full h-100 object-cover rounded-t-lg"
+              className="w-full h-60 object-cover rounded-t-lg"
             />
           </Link>
           {/* Price label on top of the image */}

@@ -8,17 +8,18 @@ export default function ItemTable() {
   const [listItems, setListItems] = useState([]);
   const [totalPages, setTotalPages] = useState(2);
   const [currentPage, setCurrentPage] = useState(1);
+  const [limit, setLimit] = useState(5);
   const [searchTerm, setSearchTerm] = useState("");
 
   // Fetch items when the component is mounted or page/searchTerm changes
   useEffect(() => {
-    getItems(searchTerm, currentPage);
+    getItems(searchTerm, currentPage, limit);
   }, [currentPage, searchTerm]);
 
   // Fetch all items with pagination and search term
-  const getItems = async (searchTerm, page) => {
+  const getItems = async (searchTerm, page, limit) => {
     try {
-      let res = await getAllItems(searchTerm, page);
+      let res = await getAllItems(searchTerm, page, limit);
       if (res) {
         setListItems(res.data);
         setTotalPages(res.totalPages);
@@ -97,7 +98,7 @@ export default function ItemTable() {
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-500">
                       <img
-                        src={item.imageUrl}
+                        src={item.itemUrl}
                         alt={item.itemName}
                         className="w-16 h-16 object-cover"
                       />
