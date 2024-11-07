@@ -53,13 +53,13 @@ export const combo = [
     
 ];
 export const categories = [
-    { id: "all", name: "Tất Cả", link: "/menu" },
-    { id: "bestseller", name: "Best Seller", link: "/Bestseller" },
-    { id: "combo", name: "Combo", link: "/Combo" },
-    { id: "garan", name: "Gà Rán", link: "/Garan" },
-    { id: "burger", name: "Burger", link: "/Burger" },
-    { id: "miy", name: "Mì Ý", link: "/Miy" },
-    { id: "thucuong", name: "Nước", link: "/Thucuong" },
+    { id: "all", name: "Tất Cả", categoryTerm: ""},
+    { id: "bestseller", name: "Best Seller", categoryTerm: ""},
+    { id: "combo", name: "Combo", categoryTerm: "Combo" },
+    { id: "garan", name: "Gà Rán", categoryTerm: "Gà rán"},
+    { id: "burger", name: "Burger", categoryTerm: "Burger" },
+    { id: "miy", name: "Món ăn kèm", categoryTerm: "Món ăn kèm" },
+    { id: "thucuong", name: "Nước", categoryTerm: "Nước" },
   ];
   export const districtData = {
     "Hà Nội": ["Ba Đình", "Hoàn Kiếm", "Tây Hồ", "Đống Đa"],

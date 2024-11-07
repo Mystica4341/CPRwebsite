@@ -109,6 +109,15 @@ paths:
           schema:
             type: integer
             default: 5
+        - name: status
+          in: query
+          description: The status of items
+          required: false
+          schema:
+            type: string
+            enum:
+              - Active
+              - Inactive
       responses:
         "200":
           description: successful operation
@@ -302,26 +311,29 @@ paths:
           description: Invalid username supplied
         "404":
           description: User not found
-  /api/user/login:
-    get:
+  /api/login:
+    post:
       tags:
         - Account
       summary: Logs user into the system
       description: ""
       operationId: loginUser
-      parameters:
-        - name: username
-          in: query
-          description: The user name for login
-          required: false
-          schema:
-            type: string
-        - name: password
-          in: query
-          description: The password for login in clear text
-          required: false
-          schema:
-            type: string
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              required:
+                - username
+                - password
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: Tiến Tài
+                password:
+                  type: string
+                  example: "Pa$$w0rd"
       responses:
         "200":
           description: successful operation
@@ -345,7 +357,7 @@ paths:
                 type: string
         "400":
           description: Invalid username/password supplied
-  /api/user/logout:
+  /api/logout:
     get:
       tags:
         - Account
@@ -975,16 +987,3 @@ components:
             type: array
             items:
               $ref: "#/components/schemas/Order"
-  securitySchemes:
-    petstore_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
-          scopes:
-            write:pets: modify pets in your account
-            read:pets: read your pets
-    api_key:
-      type: apiKey
-      name: api_key
-      in: header

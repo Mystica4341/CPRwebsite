@@ -1,8 +1,8 @@
 // src/services/ItemService.js
 import axios from "./custom_axios";
 
-const getAllItems = async (searchTerm, page, limit) => {
-  return await axios.get(`api/item?searchTerm=${searchTerm}&page=${page}&limit=${limit}`);
+const getAllItems = async (searchTerm, page, limit, status) => {
+  return await axios.get(`api/item?searchTerm=${searchTerm}&page=${page}&limit=${limit}&status=${status}`);
 };
 
 const getItem = async (term) => {

@@ -14,12 +14,14 @@ import SettingTable from "./components/admin/SettingTable";
 import Login from "./components/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "./context/CartContext";
+import { SearchProvider } from "./context/SearchContext";
 import ClientRoute from "./components/routes/ClientRoute";
 import AdminRoute from "./components/routes/AdminRoute";
 
 function App() {
   return (
     <BrowserRouter>
+      <SearchProvider>
       <CartProvider>
         <Routes>
           {/* Client Routes */}
@@ -61,6 +63,7 @@ function App() {
           />
         </Routes>
       </CartProvider>
+      </SearchProvider>
     </BrowserRouter>
   );
 }

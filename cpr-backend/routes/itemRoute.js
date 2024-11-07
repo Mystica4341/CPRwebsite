@@ -27,10 +27,17 @@ itemRouter.get('/api/item', async (req, res) => {
     const searchTerm = req.query.searchTerm || ""; // Default search term is empty
     const page = parseInt(req.query.page) || 1; // Default page is 1
     const limit = parseInt(req.query.limit) || 5; // Default limit is 5 per page
+    const status = req.query.status || ""; // Default status is all
     const skip = (page - 1) * limit; // Calculate skip
 
     const regex = new RegExp(searchTerm, 'i'); // Create a case-insensitive regex
-    const items = await Item.find({ $or: [{ category: { $regex: regex }}, { itemName: { $regex: regex }}]}).limit(limit).skip(skip); // Find items by name or category with limit and skip
+    const items = await Item.find(
+      { $and: [
+        { $or: [{ category: { $regex: regex }}, { itemName: { $regex: regex }}]},
+        status ? {status: status} : {} // Filter by status
+        ]
+      }
+    ).limit(limit).skip(skip); // Find items by name or category with limit and skip
     if (!items) {
       return res.status(404).json({ message: 'Item not found' });
     }
@@ -50,7 +57,7 @@ itemRouter.get('/api/item', async (req, res) => {
   }
 });
 
-// Get all items by name or category (GET request)
+// Get item by name or category (GET request)
 /**
  * @swagger
  * /api/item/{term}:
@@ -59,7 +66,7 @@ itemRouter.get('/api/item/:term', async (req, res) => {
   try {
     const name = req.params.term.toLowerCase(); // Get name from request URL
     const regex = new RegExp(name, 'i'); // Create a case-insensitive regex
-    const item = await Item.find({ $or: [{ category: { $regex: regex }}, { itemName: { $regex: regex }}]});  // Find all items by name or category
+    const item = await Item.findOne({ $or: [{ category: { $regex: regex }}, { itemName: { $regex: regex }}]});  // Find all items by name or category
     if (!item) {
       return res.status(404).json({ message: 'Item not found' });
     }

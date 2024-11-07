@@ -7,7 +7,6 @@ const CartContext = createContext();
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
 
-  // Hàm để thêm sản phẩm vào giỏ
 // Hàm để thêm sản phẩm vào giỏ
 const addToCart = (item) => {
   setCartItems((prevItems) => {
@@ -24,7 +23,6 @@ const addToCart = (item) => {
     }
   });
 };
-
 
   // Hàm để lấy số lượng sản phẩm
   const getCartQuantity = () => {

@@ -19,7 +19,7 @@ export default function Home() {
 
   const getItems = async (searchTerm, page, limit) => {
     try {
-      let res = await getAllItems(searchTerm, page, limit);
+      let res = await getAllItems(searchTerm, page, limit, "Active"); //Only show active Items
       if (res) {
         setListItems(res.data);
         setTotalPages(res.totalPages);

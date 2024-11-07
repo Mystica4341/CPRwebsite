@@ -23,6 +23,7 @@ app.use("/", require("./routes/userRoute"));
 app.use("/", require("./routes/itemRoute"));
 app.use("/", require("./routes/orderRoute"));
 app.use("/", require("./routes/categoryRoute"));
+app.use("/", require("./routes/auth"));
 app.get("/", (req, res) => {
 	res.send("Hello World!");
 });
