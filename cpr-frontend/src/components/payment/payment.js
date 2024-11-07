@@ -212,7 +212,7 @@ export default function Payment() {
 
           {cartItems.map((item, index) => (
             <div key={index} className="flex justify-between mb-2">
-              <span>{item.name}</span>
+              <span>{item.itemName}</span>
               <span>x{item.quantity}</span>
               <span>{(item.price * item.quantity).toLocaleString("vi-VN")}đ</span>
             </div>

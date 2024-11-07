@@ -7,16 +7,16 @@ export default function ItemsList(props) {
 
   const handleAddToCart = () => {
     const product = {
-      id: props.id,
+      itemName: props.itemName, // Thay id bằng itemName
       itemUrl: props.itemUrl,
-      name: props.name,
-      price: props.price,
       description: props.description,
-      quantity: 1, // Default quantity when adding from the list
+      price: props.price,
+      quantity: 1, // Mặc định là 1 khi thêm mới vào giỏ
     };
-    addToCart(product); // Add product to cart
-    alert("Đã thêm vào giỏ hàng thành công!"); // Success notification
+    addToCart(product); // Thêm sản phẩm vào giỏ hàng
+    alert("Đã thêm vào giỏ hàng thành công!"); // Thông báo thành công
   };
+  
 
   return (
     <div className="flex flex-col h-full w-full max-w-xs"> {/* Ensure max height and width */}
@@ -29,7 +29,7 @@ export default function ItemsList(props) {
           <Link to={`/product/${props.itemName}`}>
             <img
               src={`${props.itemUrl}`}
-              alt={props.name}
+              alt={props.itemName}
               className="w-full h-60 object-cover rounded-t-lg"
             />
           </Link>
@@ -40,7 +40,7 @@ export default function ItemsList(props) {
         </div>
         <div className="p-4 flex flex-col flex-grow"> {/* Ensure content takes remaining space */}
           {/* Combo name and description */}
-          <h3 className="text-lg font-bold">{props.name}</h3>
+          <h3 className="text-lg font-bold">{props.itemName}</h3>
           <p className="text-sm text-gray-600">{props.description}</p>
 
           {/* Price and original price */}

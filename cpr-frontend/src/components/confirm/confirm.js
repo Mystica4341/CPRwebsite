@@ -31,8 +31,8 @@ export default function Confirm() {
       </div>
 
       {cartItems.map((item) => (
-        <div key={item.id} className="flex justify-between mb-2">
-          <span>{item.name}</span>
+        <div key={item.itemName} className="flex justify-between mb-2">
+          <span>{item.itemName}</span>
           <span>x{item.quantity}</span>
           <span>{(item.price * item.quantity).toLocaleString("vi-VN")}đ</span>
         </div>
