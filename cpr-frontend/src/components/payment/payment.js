@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import { districtData } from "../../data/data"; // Import dữ liệu quận/huyện
 
@@ -205,16 +205,18 @@ export default function Payment() {
 
           {/* Tiêu đề cho thông tin sản phẩm */}
           <div className="flex justify-between font-bold mb-2">
-            <span>Tên Sản Phẩm</span>
-            <span>SL</span>
-            <span>Thành Tiền</span>
+            <span className="w-3/5">Tên Sản Phẩm</span>
+            <span className="w-1/5 text-center">SL</span>
+            <span className="w-1/5 text-right">Thành Tiền</span>
           </div>
 
           {cartItems.map((item, index) => (
             <div key={index} className="flex justify-between mb-2">
-              <span>{item.itemName}</span>
-              <span>x{item.quantity}</span>
-              <span>{(item.price * item.quantity).toLocaleString("vi-VN")}đ</span>
+              <span className="w-3/5">{item.itemName}</span>
+              <span className="w-1/5 text-center">x{item.quantity}</span>
+              <span className="w-1/5 text-right">
+                {(item.price * item.quantity).toLocaleString("vi-VN")}đ
+              </span>
             </div>
           ))}
 
