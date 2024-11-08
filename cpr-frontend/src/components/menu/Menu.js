@@ -45,9 +45,15 @@ export default function Home() {
         <MenuCategories/>
         {/* Body */}
         <div className='grid grid-cols-4 gap-4 p-4'>
-          {listItems.map((item, index) => (
-            <ItemsList key={index} {...item} />
-          ))}
+        {listItems && listItems.length > 0 ? (
+            listItems.map((item, index) => (
+              <ItemsList key={index} {...item} />
+            ))
+          ): (
+            <tr>
+              <td colSpan={4} className='px-6 py-4 text-center text-md'>No items found</td>
+            </tr>
+          )}
         </div>
       </div>
       <ReactPaginate

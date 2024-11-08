@@ -5,6 +5,7 @@ import Cart from "./components/cart/Carts";
 import AboutUs from "./components/AboutUs";
 import Payment from "./components/payment/payment";
 import Confirm from "./components/confirm/confirm";
+import ItemDetail from "./components/itemDetail/ItemDetail";
 // Import thêm các thành phần admin
 import UserTable from "./components/admin/user/UserTable";
 import ItemsTable from "./components/admin/item/ItemsTable";
@@ -30,11 +31,9 @@ function App() {
           <Route path="/cart" element={<ClientRoute children={<Cart />} />} />
           <Route path="/payment" element={<ClientRoute children={<Payment />} />} />
           <Route path="/confirm" element={<ClientRoute children={<Confirm />} />} />
-          <Route
-            path="/AboutUs"
-            element={<ClientRoute children={<AboutUs />} />}
-          />
-          <Route path="/Login" element={<ClientRoute children={<Login />} />} />
+          <Route path="/aboutUs" element={<ClientRoute children={<AboutUs />} />}/>
+          <Route path="/item/:itemName" element={<ClientRoute children={<ItemDetail />} />} />
+          <Route path="/login" element={<ClientRoute children={<Login />} />} />
 
           {/* Admin Routes */}
           <Route

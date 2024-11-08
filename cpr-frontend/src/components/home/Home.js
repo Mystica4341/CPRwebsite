@@ -40,24 +40,29 @@ export default function Home() {
         <Banner />
         <NavigationBar />
         <div className='grid grid-cols-4 gap-4 p-4'>
-          {listItems.map((item, index) => (
+        {listItems && listItems.length > 0 ? (
+          listItems.map((item, index) => (
             <ItemsList key={index} {...item} />
-          ))}
+          ))
+        ): (
+          <tr>
+            <td colSpan={4} className='px-6 py-4 text-center text-md'>No items found</td>
+          </tr>
+        )}
         </div>
         <ReactPaginate
-     previousLabel={<span className="text-gray-500">← Previous</span>}
-     nextLabel={<span className="text-gray-500">Next →</span>}
-     breakLabel="..."
-     pageCount={totalPages}
-     marginPagesDisplayed={2}
-     pageRangeDisplayed={5}
-     onPageChange={handlePageClick}
-     containerClassName="flex justify-center mt-4 space-x-2 pb-5"
-     pageClassName="text-white-700 hover:bg-red-400 rounded-full w-8 h-8 flex items-center justify-center"
-     activeClassName="bg-red-500 text-white rounded-full"
-   />
-    </div>
+        previousLabel={<span className="text-gray-500">← Previous</span>}
+        nextLabel={<span className="text-gray-500">Next →</span>}
+        breakLabel="..."
+        pageCount={totalPages}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageClick}
+        containerClassName="flex justify-center mt-4 space-x-2 pb-5"
+        pageClassName="text-white-700 hover:bg-red-400 rounded-full w-8 h-8 flex items-center justify-center"
+        activeClassName="bg-red-500 text-white rounded-full"
+        />
       </div>
-    
+    </div>
   );
 }

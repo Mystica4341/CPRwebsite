@@ -26,7 +26,7 @@ export default function ItemsList(props) {
       >
         <div className="relative flex-grow"> {/* Flex-grow for full image height */}
           {/* Dynamically load combo image based on ID */}
-          <Link to={`/product/${props.itemName}`}>
+          <Link to={`/item/${props.itemName}`}>
             <img
               src={`${props.itemUrl}`}
               alt={props.itemName}
