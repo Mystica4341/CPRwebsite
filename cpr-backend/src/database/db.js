@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const uri =process.env.MONGODB_URI;
-const localUri = process.env.MONGODBLOCAL_URI;
+const localUri = process.env.MONGOLOCAL_URI;
 
 async function connectDB() {
 	try {
