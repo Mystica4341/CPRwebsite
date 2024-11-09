@@ -19,7 +19,7 @@ export default function ItemTable() {
   // Fetch all items with pagination and search term
   const getItems = async (searchTerm, page, limit) => {
     try {
-      let res = await getAllItems(searchTerm, page, limit);
+      let res = await getAllItems(searchTerm, page, limit, "");
       if (res) {
         setListItems(res.data);
         setTotalPages(res.totalPages);
@@ -70,7 +70,7 @@ export default function ItemTable() {
             <thead className="bg-gray-100">
               <tr>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                  Item ID
+                  Index
                 </th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
                   Item Name
@@ -83,6 +83,9 @@ export default function ItemTable() {
                 </th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
                   Price
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+                  Status
                 </th>
                 <th className="px-6 py-3 text-right text-sm font-semibold text-gray-600">
                   Action
@@ -112,7 +115,9 @@ export default function ItemTable() {
                     <td className="px-6 py-4 text-sm text-gray-500">
                       {item.price}
                     </td>
-                    
+                    <td className="px-6 py-4 text-sm text-gray-500">
+                      {item.status}
+                    </td>
                     <td className="px-6 py-4 text-right text-sm font-medium">
                       <div className="flex float-right">
                         <GoPencil
