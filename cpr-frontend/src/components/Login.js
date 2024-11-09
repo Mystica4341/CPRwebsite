@@ -1,16 +1,22 @@
-import React from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate from React Router
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   // Function to handle navigation back to "Món Ăn"
   const handleClose = () => {
     navigate("/"); // Navigates to the "Món Ăn" page
   };
 
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
   return (
-    <div className="  bg-cover bg-center min-h-screen flex items-center justify-center">
+    <div className="bg-cover bg-center min-h-screen flex items-center justify-center">
       {/* Login form section */}
       <div className="relative bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
         {/* Close button (X) */}
@@ -37,8 +43,36 @@ export default function Login() {
           <input
             type="text"
             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-red-500 focus:outline-none focus:ring-red-500"
-            placeholder="Nhập số điện thoại của bạn/Email"
+            placeholder="Nhập tên người dùng"
           />
+          <input
+            type="text"
+            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-red-500 focus:outline-none focus:ring-red-500"
+            placeholder="Nhập Email"
+          />
+
+          <div className="relative mt-2">
+            <input
+              type={showPassword ? "text" : "password"}
+              className="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-red-500 focus:outline-none focus:ring-red-500"
+              placeholder="Nhập mật khẩu"
+            />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 focus:outline-none"
+            >
+              <img
+                src={
+                  showPassword
+                    ? "https://i.imgur.com/TQuNurt.png" // Mắt mở
+                    : "https://i.imgur.com/ZnnqnF0.png" // Mắt nhắm
+                }
+                alt="Toggle Password Visibility"
+                className="w-6 h-6"
+              />
+            </button>
+          </div>
         </div>
 
         <div className="mt-6">
@@ -52,7 +86,7 @@ export default function Login() {
           <a
             href="#"
             className="text-red-500 hover:underline"
-            onClick={handleClose} // This will also navigate back to the "Món Ăn" page
+            onClick={handleClose}
           >
             Mua hàng không cần tài khoản
           </a>
