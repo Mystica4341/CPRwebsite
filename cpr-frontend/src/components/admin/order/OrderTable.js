@@ -20,7 +20,7 @@ export default function OrderTable() {
   const getOrders = async (searchTerm, page) => {
     try {
       let res = await getAllOrders(searchTerm, page);
-      if (res) {
+      if (res && res.data) {
         setListOrders(res.data);
         setTotalPages(res.totalPages);
       }

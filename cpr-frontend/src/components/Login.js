@@ -1,9 +1,41 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { UserContext } from "../context/UserContext";
+import AuthService from "../services/AuthService";
+import { toast } from "react-toastify";
+ 
 export default function Login() {
+  const {login} = useContext(UserContext);
+
   const navigate = useNavigate();
+
+  const [account, setAccount] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  
+  useEffect(() => {
+    // let token = localStorage.getItem("token");
+    // if (token) {
+    //   navigate("/");
+    // }
+  }, []);
+
+  const handleLogin = async () => {
+    if (! account || ! password) {
+      alert("Please enter username and password");
+      return;
+    }
+    let res = await AuthService.login(account, password);
+    console.log(res);
+    try {
+      login(res.token);
+      alert("Login successfully!");
+      console.log(res.userData);
+      navigate("/");
+    } catch (error) {
+      alert(res.data.message);
+    }
+  }
 
   // Function to handle navigation back to "Món Ăn"
   const handleClose = () => {
@@ -43,19 +75,15 @@ export default function Login() {
           <input
             type="text"
             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-red-500 focus:outline-none focus:ring-red-500"
-            placeholder="Nhập tên người dùng"
+            placeholder="Nhập username hoặc email"
+            onChange={(e) => setAccount(e.target.value)}
           />
-          <input
-            type="text"
-            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-red-500 focus:outline-none focus:ring-red-500"
-            placeholder="Nhập Email"
-          />
-
           <div className="relative mt-2">
             <input
               type={showPassword ? "text" : "password"}
               className="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-red-500 focus:outline-none focus:ring-red-500"
               placeholder="Nhập mật khẩu"
+              onChange={(e) => setPassword(e.target.value)}
             />
             <button
               type="button"
@@ -76,8 +104,8 @@ export default function Login() {
         </div>
 
         <div className="mt-6">
-          <button className="inline-flex justify-center px-4 py-2 w-full text-sm font-medium text-white bg-red-500 border border-transparent rounded-md hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-            Tiếp tục
+          <button className="inline-flex justify-center px-4 py-2 w-full text-sm font-medium text-white bg-red-500 border border-transparent rounded-md hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" onClick={() =>handleLogin()}>
+            Login
           </button>
         </div>
 

@@ -17,7 +17,7 @@ export default function CategoryTable() {
   const getCategories = async () => {
     try {
       let res = await getAllCategories(); // Gọi API để lấy danh sách category
-      if (res) {
+      if (res && res.data) {
         setListCategories(res);
       }
     } catch (error) {

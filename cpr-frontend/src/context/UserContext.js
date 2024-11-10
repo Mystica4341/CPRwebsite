@@ -7,6 +7,9 @@ const UserContext = createContext({user: null, admin: null});
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [admin, setAdmin] = useState(null);
+  const [phoneNumbr, setPhoneNumbr] = useState('');
+  const [address, setAddress] = useState('');
+  
 
   const login = (token) => {
     localStorage.setItem('token', token);

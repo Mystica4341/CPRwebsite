@@ -20,7 +20,7 @@ export default function ItemTable() {
   const getItems = async (searchTerm, page, limit) => {
     try {
       let res = await getAllItems(searchTerm, page, limit, "");
-      if (res) {
+      if (res && res.data) {
         setListItems(res.data);
         setTotalPages(res.totalPages);
       }

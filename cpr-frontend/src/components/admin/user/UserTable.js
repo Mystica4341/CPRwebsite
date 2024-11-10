@@ -3,12 +3,19 @@ import ReactPaginate from "react-paginate";
 import { FaTrashAlt } from "react-icons/fa";
 import { GoPencil } from "react-icons/go";
 import { getAllUsers } from "../../../services/UserService";
+import ModalAddUser from "./ModalAddUser";
+import ModelEditUser from "./ModelEditUser";
+import ModalDeleteUser from "./ModalDeleteUser";
 
 export default function UserTable() {
   const [listUsers, setListUsers] = useState([]);
   const [totalPages, setTotalPages] = useState(2);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isModalAddOpen, setIsModalAddOpen] = useState(false);
+  const [isModalEditOpen, setIsModalEditOpen] = useState(false);
+  const [isModelDeleteOpen, setIsModelDeleteOpen] = useState(false);
+  const [dataUser, setDataUser] = useState({});
 
   // Fetch all users when the component is mounted
   useEffect(() => {
@@ -19,7 +26,7 @@ export default function UserTable() {
   const getUsers = async (searchTerm, page) => {
     try {
       let res = await getAllUsers(searchTerm, page);
-      if (res) {
+      if (res && res.data) {
         setListUsers(res.data);
         setTotalPages(res.totalPages);
       }
@@ -34,16 +41,29 @@ export default function UserTable() {
   };
 
   const handleEditUser = (user) => {
-    console.log("Edit user: ", user);
+    setDataUser(user);
+    setIsModalEditOpen(true);
   };
 
   const handleDeleteUser = (user) => {
-    console.log("Delete user: ", user);
+    setDataUser(user);
+    setIsModelDeleteOpen(true);
   };
 
   const handelAddUser = () => {
-    console.log("Add new user");
+    setIsModalAddOpen(true);
   };
+
+  const handleCloseModal = () => {
+    setIsModalEditOpen(false);
+		setIsModalAddOpen(false);
+    setIsModelDeleteOpen(false);
+	};
+
+  const handleSubmit = (event) => {
+		event.preventDefault();
+		setIsModalAddOpen(false);
+	};
 
   const handleSearch = (event) => {
 		let term = event.target.value;
@@ -142,6 +162,25 @@ export default function UserTable() {
         containerClassName="flex justify-center mt-4 space-x-2"
         pageClassName="text-white-700 hover:bg-sky-200 rounded-full w-8 h-8 flex items-center justify-center my-auto"
         activeClassName="bg-sky-400 text-white rounded-full"
+      />
+      <ModalAddUser
+				isOpen={isModalAddOpen}
+				onClose={handleCloseModal}
+				onSubmit={handleSubmit}
+				onCreateSuccess={() => getUsers(searchTerm, 1)}
+			/>
+      <ModelEditUser
+        isOpen={isModalEditOpen}
+        onClose={handleCloseModal}
+        onSubmit={handleSubmit}
+        dataUserEdit={dataUser}
+        onEditSuccess={() => getUsers(searchTerm, currentPage)}
+      />
+      <ModalDeleteUser
+        isOpen={isModelDeleteOpen}
+        onClose={handleCloseModal}
+        dataUser={dataUser}
+        onDeleteSuccess={() => getUsers(searchTerm, currentPage)}
       />
     </>
   );

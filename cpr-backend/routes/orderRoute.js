@@ -32,7 +32,7 @@ orderRouter.get('/api/order', async (req, res) => {
     const regex = new RegExp(searchTerm, 'i'); // Create a case-insensitive regex
     const orders = await Order.find({ username: { $regex: regex } }).limit(limit).skip(skip); // Find orders by username with limit and skip
     if (!orders) {
-      return res.status(404).json({ message: 'Order not found' });
+      return res.status(404).json({ data: { message: 'Order not found' }, status: 404 });
     }
 
     // Count total
@@ -43,10 +43,11 @@ orderRouter.get('/api/order', async (req, res) => {
       Size: limit,
       currentPage: page,
       totalPages: totalPages,
-      data: orders
+      data: orders,
+      status: 200
     });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({ data: { message: error.message }, status: 500 });
   }
 });
 
@@ -62,9 +63,12 @@ orderRouter.get('/api/order/:orderId', async (req, res) => {
     if (!order) {
         res.status(404).json({ message: "Order not found!" });
     } 
-    return res.status(200).json(order);
+    return res.status(200).json({
+      data: order,
+      status: 200
+    });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({ data: { message: error.message }, status: 500 });
   }
 });
 
@@ -83,9 +87,12 @@ orderRouter.post('/api/order', async (req, res) => {
   });
   try {
     await order.save();
-    return res.status(201).json(order);
+    return res.status(201).json({
+      data: order,
+      status: 201
+    });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(400).json({ data: { message: error.message }, status: 400 });
   }
 });
 
@@ -99,7 +106,7 @@ orderRouter.put('/api/order/:orderId', async (req, res) => {
     const id = req.params.orderId; // Get id from request URL
     const order = await Order.findOne({ orderId: id });  // Find order by id
     if (!order) {
-      return res.status(404).json({ message: 'Order not found' });
+      return res.status(404).json({ data: { message: 'Order not found' }, status: 404 });
     }
     order.username = req.body.username;
     order.orderDate = req.body.orderDate;
@@ -107,9 +114,12 @@ orderRouter.put('/api/order/:orderId', async (req, res) => {
     order.total = req.body.total;
     order.status = req.body.status;
     await order.save();
-    return res.status(200).json(order);
+    return res.status(200).json({
+      data: order,
+      status: 200
+    });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({ data: { message: error.message }, status: 500 });
   }
 });
 
@@ -123,12 +133,12 @@ orderRouter.delete('/api/order/:orderId', async (req, res) => {
     const id = req.params.orderId; // Get id from request URL
     const order = await Order.findOne({ orderId: id });  // Find order by id
     if (!order) {
-      return res.status(404).json({ message: 'Order not found' });
+      return res.status(404).json({ data: { message: 'Order not found' }, status: 404 });
     }
     await Order.deleteOne({ orderId: id }); //Delete order by id
-    return res.status(200).json({ message: 'Order deleted' });
+    return res.status(200).json({ data: { message: `Order ${id} deleted` }, status: 200 });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({ data: { message: error.message }, status: 500 });
   }
 });
 

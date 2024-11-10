@@ -32,21 +32,21 @@ userRouter.get('/api/user', async (req, res) => {
     const regex = new RegExp(searchTerm, 'i'); //Create a case-insensitive regex
     const users = await User.find({ username: { $regex: regex }}).limit(limit).skip(skip); //Find users by name with limit and skip
     if (!users) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ data: {message: 'User not found'}, status: 404 });
     }
-
     //Count total
     const totalUsers = await User.countDocuments({ username: { $regex: regex }}); //Count total users
     const totalPages = Math.ceil(totalUsers / limit); //Calculate total pages
     return res.status(200).json({ 
       totalUsers: totalUsers,
-      Size: limit,
+      size: limit,
       currentPage: page,
       totalPages: totalPages,
-      data: users
+      data: users,
+      status: 200
     });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({ data: { message: error.message }, status: 500 });
   }
 });
 
@@ -61,11 +61,14 @@ userRouter.get('/api/user/:username', async (req, res) => {
     const regex = new RegExp(name, 'i'); // Create a case-insensitive regex
     const user = await User.findOne({ username: { $regex: regex }});  // Find user by name
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ data: {message: 'User not found'}, status: 404 });
     }
-    return res.status(200).json(user);
+    return res.status(200).json({
+      data: user,
+      status: 200
+    });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({ data: { message: error.message }, status: 500 });
   }
 });
 
@@ -83,9 +86,12 @@ userRouter.post('/api/user', async (req, res) => {
   });
   try {
     await user.save();
-    return res.status(201).json(user);
+    return res.status(201).json({
+      data: user,
+      status: 201
+    });
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return res.status(400).json({ data: { message: error.message }, status: 400 });
   }
 });
 
@@ -100,7 +106,7 @@ userRouter.put('/api/user/:username', async (req, res) => {
     const regex = new RegExp(name, 'i'); // Create a case-insensitive regex
     const user = await User.findOne({ username: { $regex: regex }});  // Find user by name
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ data: {message: 'User not found'}, status: 404 });
     }
     user.username = req.body.username;
     user.email = req.body.email;
@@ -108,9 +114,12 @@ userRouter.put('/api/user/:username', async (req, res) => {
     user.address = req.body.address;
     user.status = req.body.status;
     await user.save();
-    return res.status(200).json(user);
+    return res.status(200).json({
+      data: user,
+      status: 200
+    });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({ data: { message: error.message }, status: 500 });
   }
 });
 
@@ -125,12 +134,12 @@ userRouter.delete('/api/user/:username', async (req, res) => {
     const regex = new RegExp(name, 'i'); // Create a case-insensitive regex
     const user = await User.findOne({ username: { $regex: regex }});  // Find user by name
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ data: {message: 'User not found'}, status: 404 });
     }
     await User.deleteOne({ username: { $regex: regex }}); //Delete user by name
-    return res.status(200).json({ message: 'User deleted' });
+    return res.status(200).json({ data: { message: `User ${name} deleted` }, status: 200 });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(500).json({ data: { message: error.message }, status: 500 });
   }
 });
 

@@ -324,11 +324,11 @@ paths:
           application/json:
             schema:
               required:
-                - username
+                - account
                 - password
               type: object
               properties:
-                username:
+                account:
                   type: string
                   example: Tiến Tài
                 password:
@@ -357,17 +357,6 @@ paths:
                 type: string
         "400":
           description: Invalid username/password supplied
-  /api/logout:
-    get:
-      tags:
-        - Account
-      summary: Logout current logged in user session
-      description: ""
-      operationId: logoutUser
-      parameters: []
-      responses:
-        default:
-          description: successful operation
   /api/user/{username}:
     get:
       tags:

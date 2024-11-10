@@ -9,13 +9,13 @@ const getUser = async (username) => {
 };
 
 //need to change from object to attribute in obj in order to understand
-const addUser = async (username, password, email, phoneNumber, address, role, status) => {
-  return await axios.post("api/user", { username, password, email, phoneNumber, address, role, status });
+const addUser = async (username, email, phoneNumber, address, password, role, status) => {
+  return await axios.post("api/user", {username, email, phoneNumber, address, password, role, status});
 };
 
 //need to change from object to attribute in obj in order to understand
-const updateUser = async (username, password, email, phoneNumber, address, role, status) => {
-  return await axios.put(`api/user/${username}`, { username, password, email, phoneNumber, address, role, status });
+const updateUser = async (username, email, phoneNumber, address, password, role, status) => {
+  return await axios.put(`api/user/${username}`, {username, email, phoneNumber, address, password, role, status});
 };
 
 const deleteUser = async (username) => {
