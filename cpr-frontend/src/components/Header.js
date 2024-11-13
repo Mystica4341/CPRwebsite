@@ -49,6 +49,12 @@ export default function Header() {
         >
           About Us
         </Link>
+        <Link
+          to="/AboutUs"
+          className="hover:text-red-500 transition-colors duration-300"
+        >
+          Store
+        </Link>
       </div>
 
       <div className="space-x-5 my-auto border-black border-2 rounded-sm flex">
