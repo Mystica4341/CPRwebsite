@@ -9,14 +9,13 @@ import { useNavigate } from "react-router-dom";
 export default function ItemDetail() {
   const [itemDetail, setItemDetail] = useState("");
   const { itemName } = useParams();
-  const [ originalPrice, setOriginalPrice ] = useState("")
+  const [ originalPrice, setOriginalPrice ] = useState(0)
   const { addToCart } = useCart(); 
   const { cartItems, setCartItems } = useCart();
   const [quantities, setquantities] = useState(1);
   const navigate = useNavigate(); 
   useEffect(() => {
     getItemDetail(itemName);
-    setOriginalPrice(itemDetail.price + 20000)
   }, [itemName]);
   const HandleAddtoCart = () => {
     const product = {
@@ -48,7 +47,7 @@ export default function ItemDetail() {
     
       if (res && res.data) {
         setItemDetail(res.data);
-     
+        setOriginalPrice(itemDetail.price + 20000)
       }
     }
     catch(error){
