@@ -66,7 +66,6 @@ export default function ItemDetail() {
     <div className="w-1/2 flex justify-end">
       <img
         src={itemDetail.itemUrl}// Replace with the actual path to your image
-      
         className="max-w-xs"
       />
     </div>
@@ -82,18 +81,20 @@ export default function ItemDetail() {
         <p className="text-gray-400 line-through ml-2 mt-5">{originalPrice.toLocaleString("vi-VN")}đ</p>
       </div>
 
-      <div className="flex items-center mt-4">
+      <div className="flex items-center mt-4 text-center">
         <button
-          className="bg-blue-500 text-white px-2 py-1 rounded-md mr-2"
+          className="bg-red-500 text-white px-2 py-1 rounded-md mr-2 w-7"
           onClick={() => handleIncrease(itemDetail.itemName)}>+</button>
         <span>{quantities}</span>
         <button
-          className="bg-blue-500 text-white px-2 py-1 rounded-md ml-2"
+          className="bg-red-500 text-white px-2 py-1 rounded-md ml-2 w-7"
           onClick={() => handleDecrease(itemDetail.itemName)}>-</button>
       </div>
-      
+
       {/* Button */}
-      <button className="mt-6 px-6 py-2 border border-black rounded-full hover:bg-red-500 hover:text-white transition-colors " onClick={HandleAddtoCart}>
+      <button 
+        className="mt-6 px-6 py-2 border rounded-xl bg-red-500 text-white hover:bg-black hover:text-white transition-colors" 
+        onClick={HandleAddtoCart}>
         Thêm vào giỏ
       </button>
     </div>
