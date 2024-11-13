@@ -66,7 +66,7 @@ export default function Header() {
       <div className="space-x-5 my-auto border-black border-2 rounded-sm flex">
         <input
           type="text"
-          className="w-full p-2 h-7 my-auto"
+          className="w-full p-2 h-7 my-auto focus:outline-none"
           placeholder="Search..."
         />
         <IoSearchSharp className="justify-center my-auto text-2xl pr-1" />
