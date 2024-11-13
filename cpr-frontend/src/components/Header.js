@@ -35,7 +35,7 @@ export default function Header() {
           to="/"
           className="hover:text-red-500 transition-colors duration-300"
         >
-          Món Ăn
+          Home
         </Link>
         <Link
           to="/menu"
@@ -43,23 +43,11 @@ export default function Header() {
         >
           Menu
         </Link>
-        <a className="hover:text-red-500 transition-colors duration-300">
-          Đồ Uống
-        </a>
-        <a className="hover:text-red-500 transition-colors duration-300">
-          Combo
-        </a>
         <Link
           to="/AboutUs"
           className="hover:text-red-500 transition-colors duration-300"
         >
           About Us
-        </Link>
-        <Link
-          to="/admin"
-          className="hover:text-red-500 transition-colors duration-300"
-        >
-          Admin
         </Link>
       </div>
 

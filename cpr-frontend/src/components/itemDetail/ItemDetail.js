@@ -66,12 +66,13 @@ export default function ItemDetail() {
     <div className="w-1/2 flex justify-end">
       <img
         src={itemDetail.itemUrl}// Replace with the actual path to your image
-        className="max-w-xs"
+      
+        className="w-4/5 mb-28"
       />
     </div>
 
     {/* Text Section */}
-    <div className="w-1/2 ml-8">
+    <div className="w-1/2 ml-8 mb-28">
       <h2 className="text-4xl font-bold">{itemDetail.itemName}</h2>
 
       <p className="text-lg mt-2">{itemDetail.description}</p>
