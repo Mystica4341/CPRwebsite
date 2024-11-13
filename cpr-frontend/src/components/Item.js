@@ -1,8 +1,9 @@
 import React from "react";
 import { useCart } from "../context/CartContext";
 import { Link } from "react-router-dom";
-
+import {useState} from "react";
 export default function ItemsList(props) {
+  const [ originalPrice, setOriginalPrice ] = useState(props.price + 20000)
   const { addToCart } = useCart(); // Use hook from context
 
   const handleAddToCart = () => {
@@ -16,8 +17,6 @@ export default function ItemsList(props) {
     addToCart(product); // Thêm sản phẩm vào giỏ hàng
     alert("Đã thêm vào giỏ hàng thành công!"); // Thông báo thành công
   };
-  
-
   return (
     <div className="flex flex-col h-full w-full max-w-xs"> {/* Ensure max height and width */}
       <div
@@ -48,9 +47,9 @@ export default function ItemsList(props) {
             <span className="text-red-500 font-bold text-lg">
               {props.price.toLocaleString("vi-VN")}đ
             </span>
-            {props.originalPrice && (
+            {originalPrice && (
               <span className="text-gray-400 line-through ml-2">
-                {props.originalPrice.toLocaleString("vi-VN")}đ
+                {originalPrice.toLocaleString("vi-VN")}đ
               </span>
             )}
           </div>
