@@ -7,8 +7,6 @@ const UserContext = createContext({user: null, admin: null});
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [admin, setAdmin] = useState(null);
-  const [phoneNumbr, setPhoneNumbr] = useState('');
-  const [address, setAddress] = useState('');
   
 
   const login = (token) => {
@@ -17,13 +15,15 @@ const UserProvider = ({ children }) => {
     const username = decodedToken.username;
     const email = decodedToken.email;
     const role =  decodedToken.role; 
+    const phoneNumber = decodedToken.phoneNumber;
+    const address = decodedToken.address;
 
     //set Admin or User
     if (role === 'admin') {
-      setAdmin({ username: username, email: email, role: role, auth: true });
+      setAdmin({ username: username, email: email, role: role, phoneNumber: phoneNumber, address: address, auth: true });
       setUser(null);
     } else {
-      setUser({ username: username, email: email, role: role, auth: true });
+      setUser({ username: username, email: email, role: role, phoneNumber: phoneNumber, address: address, auth: true });
       setAdmin(null);
     }
   }

@@ -2,7 +2,6 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const {User} = require('../src/schema/cprSchema');
 const crypto = require('crypto');
-const { stat } = require('fs');
 const router = express.Router();
 
 // Login route
@@ -23,7 +22,7 @@ router.post('/api/login', async (req, res) => {
     const Key = crypto.randomBytes(64).toString('hex');
 
     // If the username and password are valid, generate a JWT token
-    const token = jwt.sign({ username: user.username, email: user.email, role: user.role }, Key, { expiresIn: '1h' });
+    const token = jwt.sign({ username: user.username, email: user.email, phoneNumber: user.phoneNumber, address: user.address, role: user.role }, Key, { expiresIn: '1h' });
 
     // Send the token as a response
     return res.status(200).json({ 
@@ -32,7 +31,7 @@ router.post('/api/login', async (req, res) => {
       status: 200
     });
   } catch (error) {
-    return res.status(500).json({ data: { message: error.message }, status: 500 });
+    return res.status(500).json({message: error.message});
   }
 });
 

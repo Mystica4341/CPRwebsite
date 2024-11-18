@@ -39,7 +39,7 @@ itemRouter.get('/api/item', async (req, res) => {
       }
     ).limit(limit).skip(skip); // Find items by name or category with limit and skip
     if (!items) {
-      return res.status(404).json({ data: { message: 'Item not found' }, status: 404 });
+      return res.status(404).json({ message: 'Item not found' });
     }
 
     // Count total
@@ -54,7 +54,7 @@ itemRouter.get('/api/item', async (req, res) => {
       status: 200
     });
   } catch (error) {
-    return res.status(500).json({ data: { message: error.message }, status: 500 });
+    return res.status(500).json({ message: error.message });
   }
 });
 
@@ -69,14 +69,14 @@ itemRouter.get('/api/item/:term', async (req, res) => {
     const regex = new RegExp(name, 'i'); // Create a case-insensitive regex
     const item = await Item.findOne({ $or: [{ category: { $regex: regex }}, { itemName: { $regex: regex }}]});  // Find all items by name or category
     if (!item) {
-      return res.status(404).json({ data: { message: 'Item not found' }, status: 404 });
+      return res.status(404).json({ message: 'Item not found' });
     }
     return res.status(200).json({
       data: item,
       status: 200
     });
   } catch (error) {
-    return res.status(500).json({ data: { message: error.message }, status: 500 });
+    return res.status(500).json({ message: error.message });
   }
 });
 
@@ -100,7 +100,7 @@ itemRouter.post('/api/item', async (req, res) => {
       status: 201
     });
   } catch (error) {
-    return res.status(400).json({ data: { message: error.message }, status: 400 });
+    return res.status(400).json({ message: error.message });
   }
 });
 
@@ -128,7 +128,7 @@ itemRouter.put('/api/item/:itemName', async (req, res) => {
       status: 200
     });
   } catch (error) {
-    return res.status(500).json({ data: { message: error.message }, status: 500 });
+    return res.status(500).json({ message: error.message });
   }
 });
 
@@ -143,12 +143,12 @@ itemRouter.delete('/api/item/:itemName', async (req, res) => {
     const regex = new RegExp(name, 'i'); // Create a case-insensitive regex
     const item = await Item.findOne({ itemName: { $regex: regex }});  // Find item by name
     if (!item) {
-      return res.status(404).json({ data: { message: 'Item not found' }, status: 404 });
+      return res.status(404).json({message: 'Item not found' });
     }
     await Item.deleteOne({ itemName: { $regex: regex }}); //Delete item by name
     return res.status(200).json({ data: { message: `item ${name} deleted` }, status: 200 });
   } catch (error) {
-    return res.status(500).json({ data: { message: error.message }, status: 500 });
+    return res.status(500).json({ message: error.message });
   }
 });
 

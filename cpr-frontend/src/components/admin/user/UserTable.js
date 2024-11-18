@@ -179,6 +179,7 @@ export default function UserTable() {
       <ModalDeleteUser
         isOpen={isModelDeleteOpen}
         onClose={handleCloseModal}
+        onSubmit={handleSubmit}
         dataUser={dataUser}
         onDeleteSuccess={() => getUsers(searchTerm, currentPage)}
       />
