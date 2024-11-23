@@ -71,25 +71,45 @@ export default function OrderTable() {
           <table className="min-w-full bg-white border border-gray-200">
             <thead className="bg-gray-100">
               <tr>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">Order ID</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">Username</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">Order Date</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">Total</th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">Status</th>
-                <th className="px-6 py-3 text-right text-sm font-semibold text-gray-600">Action</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+                  Order ID
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+                  Username
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+                  Order Date
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+                  Total
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+                  Status
+                </th>
+                <th className="px-6 py-3 text-right text-sm font-semibold text-gray-600">
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>
               {listOrders.length > 0 ? (
                 listOrders.map((order, index) => (
                   <tr key={index} className="border-t border-gray-200">
-                    <td className="px-6 py-4 text-sm text-gray-900">{order.orderId}</td>
-                    <td className="px-6 py-4 text-sm text-gray-500">{order.username}</td>
-                    <td className="px-6 py-4 text-sm text-gray-500">
-                      {new Date(order.orderDate).toLocaleDateString()}
+                    <td className="px-6 py-4 text-sm text-gray-900">
+                      {order.orderId}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-500">{order.total}</td>
-                    <td className="px-6 py-4 text-sm text-gray-500">{order.status}</td>
+                    <td className="px-6 py-4 text-sm text-gray-500">
+                      {order.username}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-500">
+                      {order.orderDate}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-500">
+                      {order.total.toLocaleString("vi-VN")}đ
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-500">
+                      {order.status}
+                    </td>
                     <td className="px-6 py-4 text-right text-sm font-medium">
                       <div className="flex float-right">
                         <GoPencil
@@ -106,7 +126,10 @@ export default function OrderTable() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="6" className="px-6 py-4 text-center text-sm text-gray-500">
+                  <td
+                    colSpan="6"
+                    className="px-6 py-4 text-center text-sm text-gray-500"
+                  >
                     No Orders available.
                   </td>
                 </tr>

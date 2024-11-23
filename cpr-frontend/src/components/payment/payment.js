@@ -1,41 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
-import { districtData } from "../../data/data"; // Import dữ liệu quận/huyện
+import { UserContext } from "../../context/UserContext";
+import { addOrder, getAllOrders } from "../../services/OrderService";
 
 export default function Payment() {
   const navigate = useNavigate(); // Khai báo useNavigate
-  const { cartItems } = useCart(); // Lấy thông tin giỏ hàng
+  const { cartItems, setCartItems } = useCart(); // Lấy thông tin giỏ hàng
   const [isGuest, setIsGuest] = useState(false); // Kiểm tra nếu là khách lẻ
   const [paymentMethod, setPaymentMethod] = useState(""); // Phương thức thanh toán
+  const { user, admin } = useContext(UserContext);
 
-  // State cho thông tin khách lẻ
-  const [customerInfo, setCustomerInfo] = useState({
-    fullName: "",
-    phoneNumber: "",
-    city: "",
-    district: "",
-    address: "",
+  const [username, setUsername] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [address, setAddress] = useState("");
+
+  const [orderId, setOrderId] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const currentDate = new Date();
+  const formattedDate = `${String(currentDate.getDate()).padStart(
+    2,
+    "0"
+  )}-${String(currentDate.getMonth() + 1).padStart(
+    2,
+    "0"
+  )}-${currentDate.getFullYear()}`;
+
+  useEffect(() => {
+    handleGetAllOrders(searchTerm);
+    if (user && user.auth == true) {
+      setUsername(user.username);
+      setAddress(user.address);
+      setPhoneNumber(user.phoneNumber);
+    }
   });
+
+  const handleGetAllOrders = async (searchTerm) => {
+    try {
+      let check = await getAllOrders(searchTerm, 1, 20);
+      setOrderId(check.totalOrders + 1);
+    } catch (error) {
+      console.log("Error with fetching: ", error);
+    }
+  };
 
   const handleGuestToggle = () => {
     setIsGuest(!isGuest);
-  };
-
-  const handleCityChange = (e) => {
-    const selectedCity = e.target.value;
-    setCustomerInfo((prev) => ({
-      ...prev,
-      city: selectedCity,
-      district: "", // Reset quận/huyện khi thay đổi tỉnh/thành phố
-    }));
-  };
-
-  const handleDistrictChange = (e) => {
-    setCustomerInfo((prev) => ({
-      ...prev,
-      district: e.target.value,
-    }));
   };
 
   // Tính tổng tiền
@@ -51,15 +62,56 @@ export default function Payment() {
     totalAmount += shippingFee; // Cộng phí ship vào tổng tiền
   }
 
+  const handleAddOrder = async () => {
+    console.log("current orderId: ", orderId);
+
+    let items = [];
+    cartItems.map((item) => {
+      items = [
+        ...items,
+        {
+          itemName: item.itemName,
+          quantity: item.quantity,
+        },
+      ];
+    });
+    console.log("items: ", items);
+
+    let res = await addOrder(
+      orderId,
+      username,
+      formattedDate.toString(),
+      items,
+      totalAmount
+    );
+    if (res && res.status === 201) {
+      alert("Create order successfully!");
+    } else {
+      alert(res.data.message || "Error when creating User!");
+    }
+    setUsername("");
+    setPhoneNumber("");
+    setAddress("");
+  };
+
   const handleConfirm = () => {
+    // State cho thông tin khách lẻ
+    const customerInfo = {
+      fullName: username,
+      phoneNumber: phoneNumber,
+      address: address,
+    };
+
     // Validate required fields
     if (isGuest) {
-      const { fullName, phoneNumber, city, district, address } = customerInfo;
-      if (!fullName || !phoneNumber || !city || !district || !address) {
+      const { fullName, phoneNumber, address } = customerInfo;
+      if (!fullName || !phoneNumber || !address) {
         alert("Vui lòng điền đầy đủ thông tin.");
         return; // Prevent navigation
       }
     }
+
+    handleAddOrder();
 
     // Generate order code: first four letters of full name + random five-digit number
     const orderCode =
@@ -75,6 +127,8 @@ export default function Payment() {
         orderCode, // Pass the order code to confirmation
       },
     });
+
+    setCartItems([]);
   };
 
   return (
@@ -84,23 +138,51 @@ export default function Payment() {
         <div className="bg-white p-4 border rounded-md">
           <h2 className="text-xl font-bold mb-4">Thông Tin Thanh Toán</h2>
 
-          {/* Nút đăng nhập */}
-          <button className="bg-blue-500 hover:bg-red-600 text-white px-4 py-2 mb-4 rounded-md">
-            Đăng Nhập
-          </button>
-
-          {/* Khách lẻ checkbox */}
-          <div className="mb-4">
-            <label>
+          {(user && user.auth === true) || (admin && admin.auth === true) ? (
+            <div className="mb-4">
               <input
-                type="checkbox"
-                checked={isGuest}
-                onChange={handleGuestToggle}
-                className="mr-2"
+                type="text"
+                placeholder="Họ và Tên"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="border px-4 py-2 w-full mb-2"
               />
-              Khách lẻ
-            </label>
-          </div>
+              <input
+                type="text"
+                placeholder="Số Điện Thoại"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                className="border px-4 py-2 w-full mb-2"
+              />
+              <input
+                type="text"
+                placeholder="Địa Chỉ"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                className="border px-4 py-2 w-full mb-2"
+              />
+            </div>
+          ) : (
+            <div>
+              {/* Nút đăng nhập */}
+              <button className="bg-blue-500 hover:bg-red-600 text-white px-4 py-2 mb-4 rounded-md">
+                Đăng Nhập
+              </button>
+
+              {/* Khách lẻ checkbox */}
+              <div className="mb-4">
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={isGuest}
+                    onChange={handleGuestToggle}
+                    className="mr-2"
+                  />
+                  Khách lẻ
+                </label>
+              </div>
+            </div>
+          )}
 
           {/* Hiện form thông tin khách lẻ nếu checkbox được chọn */}
           {isGuest && (
@@ -108,66 +190,22 @@ export default function Payment() {
               <input
                 type="text"
                 placeholder="Họ và Tên"
-                value={customerInfo.fullName}
-                onChange={(e) =>
-                  setCustomerInfo({ ...customerInfo, fullName: e.target.value })
-                }
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 className="border px-4 py-2 w-full mb-2"
               />
               <input
                 type="text"
                 placeholder="Số Điện Thoại"
-                value={customerInfo.phoneNumber}
-                onChange={(e) =>
-                  setCustomerInfo({
-                    ...customerInfo,
-                    phoneNumber: e.target.value,
-                  })
-                }
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
                 className="border px-4 py-2 w-full mb-2"
               />
-
-              {/* Dropdown cho Tỉnh/Thành Phố */}
-              <select
-                value={customerInfo.city}
-                onChange={handleCityChange}
-                className="border px-4 py-2 w-full mb-2"
-              >
-                <option value="" disabled>
-                  Chọn Tỉnh/Thành Phố
-                </option>
-                {Object.keys(districtData).map((city) => (
-                  <option key={city} value={city}>
-                    {city}
-                  </option>
-                ))}
-              </select>
-
-              {/* Dropdown cho Quận/Huyện */}
-              <select
-                value={customerInfo.district}
-                onChange={handleDistrictChange}
-                className="border px-4 py-2 w-full mb-2"
-                disabled={!customerInfo.city} // Vô hiệu hóa nếu chưa chọn tỉnh/thành phố
-              >
-                <option value="" disabled>
-                  Chọn Quận/Huyện
-                </option>
-                {customerInfo.city &&
-                  districtData[customerInfo.city].map((district) => (
-                    <option key={district} value={district}>
-                      {district}
-                    </option>
-                  ))}
-              </select>
-
               <input
                 type="text"
-                placeholder="Địa Chỉ Cụ Thể"
-                value={customerInfo.address}
-                onChange={(e) =>
-                  setCustomerInfo({ ...customerInfo, address: e.target.value })
-                }
+                placeholder="Địa Chỉ"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
                 className="border px-4 py-2 w-full mb-2"
               />
             </div>
@@ -224,7 +262,12 @@ export default function Payment() {
           {paymentMethod === "cod" && (
             <div className="flex justify-between mb-2">
               <span>Phí Ship:</span>
-              <span>{(cartItems.length > 0 ? shippingFee : 0).toLocaleString("vi-VN")}đ</span>
+              <span>
+                {(cartItems.length > 0 ? shippingFee : 0).toLocaleString(
+                  "vi-VN"
+                )}
+                đ
+              </span>
             </div>
           )}
 

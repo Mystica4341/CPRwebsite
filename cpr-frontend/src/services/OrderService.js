@@ -1,8 +1,8 @@
 import axios from "./custom_axios";
 
-const getAllOrders = async (searchTerm, page) => {
+const getAllOrders = async (searchTerm, page, limit) => {
   return await axios.get(
-    `api/order?searchTerm=${searchTerm}&page=${page}&limit=5`
+    `api/order?searchTerm=${searchTerm}&page=${page}&limit=${limit}`
   );
 };
 
