@@ -78,6 +78,9 @@ export default function OrderTable() {
                   Username
                 </th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+                  Item Name
+                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
                   Order Date
                 </th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
@@ -100,6 +103,9 @@ export default function OrderTable() {
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-500">
                       {order.username}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-500">
+                      {(order.items).map((item) => item.itemName + ": "+ item.quantity +" món").join(", ")}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-500">
                       {order.orderDate}
