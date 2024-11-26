@@ -85,7 +85,7 @@ export default function Header() {
         />
         <IoSearchSharp className="justify-center my-auto text-2xl pr-1" />
         {filteredItems.length > 0 && (
-          <div className="absolute bg-white border border-gray-300 rounded-md mt-8 w-full max-h-60 overflow-y-auto shadow-lg z-10">
+          <div className="absolute bg-white border border-gray-300 rounded-md mt-8 w-full max-h-60 overflow-y-auto shadow-lg z-20">
             {filteredItems.map((item) => (
               <div
                 key={item._id.$oid}
