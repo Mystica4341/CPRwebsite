@@ -12,7 +12,6 @@ export default function Home() {
   const [limit, setLimit] = useState(8);
   const [isPopupOpen, setIsPopupOpen] = useState(false); // Quản lý trạng thái popup
   const [selectedSortText, setSelectedSortText] = useState("Giá"); // Text đã chọn
-
   const { searchTerm, setSearchTerm } = useSearch();
 
   useEffect(() => {
@@ -40,9 +39,11 @@ export default function Home() {
     setSelectedSortText(text); // Cập nhật text đã chọn
     setIsPopupOpen(false); // Đóng popup
     // TODO: Gọi API hoặc thực hiện sắp xếp dữ liệu theo sortOrder
-    listItems.sort((a, b) =>
-      sortOrder === "lowToHigh" ? a.price - b.price : b.price - a.price
-    );
+    {sortOrder != 'default' && (
+      listItems.sort((a, b) =>
+        sortOrder === "lowToHigh" ? a.price - b.price : b.price - a.price
+      )
+    )};
   };
 
   return (
@@ -69,6 +70,14 @@ export default function Home() {
           {/* Popup hiển thị */}
           {isPopupOpen && (
             <ul className="absolute left-0 top-full border border-gray-300 rounded bg-white shadow-md z-10">
+              <li
+                className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
+                onClick={() =>
+                  handleSortChange("default", "--")
+                }
+              >
+                --
+              </li>
               <li
                 className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
                 onClick={() =>
