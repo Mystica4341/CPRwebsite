@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import AuthService from "../services/AuthService";
-import { toast } from "react-toastify";
  
 export default function Login() {
   const {login} = useContext(UserContext);

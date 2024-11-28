@@ -112,7 +112,7 @@ const orderSchema = new mongoose.Schema({
   status: {
     type: String,
     required: false,
-    default: "Active",
+    default: "Success",
   },
 });
 
